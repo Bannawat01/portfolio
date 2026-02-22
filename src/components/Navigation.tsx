@@ -35,12 +35,12 @@ export default function Navigation() {
     return (
         <header className="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-1/2 lg:flex-col lg:justify-between lg:py-24">
             <div>
-                {/* Avatar — Agnes Tachyon GIF */}
+                {/* Avatar — Profile photo */}
                 <div className="mb-6 w-16 h-16 rounded-xl overflow-hidden border border-[#2e2e45] bg-[#1a1a26]">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                        src="https://media.tenor.com/Dn12S2BHR0UAAAAM/agnes-tachyon-uma-musume.gif"
-                        alt="Agnes Tachyon"
+                        src="/me.jpg"
+                        alt="Bannawat Rattanarak"
                         className="w-full h-full object-cover"
                     />
                 </div>
