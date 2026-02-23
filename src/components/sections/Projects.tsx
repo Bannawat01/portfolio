@@ -80,12 +80,14 @@ export default function Projects() {
                             whileInView={{ opacity: 1 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.3, delay: index * 0.07 }}
+                            whileHover={{ scale: 1.02, y: -3 }}
+                            style={{ transformOrigin: 'center' }}
                         >
                             <a
                                 href={project.url}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="group flex flex-col h-full rounded-xl border border-[#242436] bg-[#13131c] p-5 transition-all duration-200 hover:border-[#2e2e45] hover:bg-[#1a1a26]"
+                                className="project-card group flex flex-col h-full rounded-xl p-5"
                             >
                                 {/* Repo name */}
                                 <div className="flex items-center justify-between mb-3">

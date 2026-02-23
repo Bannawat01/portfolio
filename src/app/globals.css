@@ -57,3 +57,23 @@ body {
   background: #242436;
   border-radius: 3px;
 }
+
+/* ── Project Card — Glassmorphism + Gradient Border ─────────────────── */
+.project-card {
+  background:
+    linear-gradient(rgba(19, 19, 28, 0.72), rgba(19, 19, 28, 0.72)) padding-box,
+    linear-gradient(135deg, rgba(46, 46, 69, 0.9), rgba(26, 26, 38, 0.4) 50%, rgba(46, 46, 69, 0.9)) border-box;
+  border: 1px solid transparent;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card:hover {
+  background:
+    linear-gradient(rgba(26, 26, 38, 0.82), rgba(26, 26, 38, 0.82)) padding-box,
+    linear-gradient(135deg, rgba(139, 127, 255, 0.55), rgba(99, 102, 241, 0.25) 50%, rgba(139, 127, 255, 0.55)) border-box;
+  box-shadow: 0 0 0 1px rgba(139, 127, 255, 0.08) inset,
+              0 8px 32px rgba(139, 127, 255, 0.08);
+}

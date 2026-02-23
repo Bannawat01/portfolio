@@ -2,6 +2,7 @@ import Navigation from '@/components/Navigation';
 import MouseSpotlight from '@/components/MouseSpotlight';
 import About from '@/components/sections/About';
 import Experience from '@/components/sections/Experience';
+import Skills from '@/components/sections/Skills';
 import Projects from '@/components/sections/Projects';
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
           <main id="content" className="pt-24 lg:w-1/2 lg:py-24">
             <About />
             <Experience />
+            <Skills />
             <Projects />
 
             <footer className="max-w-md pb-16 text-sm text-[#6e7681] sm:pb-0">

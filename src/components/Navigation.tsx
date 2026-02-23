@@ -22,6 +22,7 @@ export default function Navigation() {
     const navLinks = [
         { id: 'about', label: t('nav_about') },
         { id: 'experience', label: t('nav_experience') },
+        { id: 'skills', label: t('nav_skills') },
         { id: 'projects', label: t('nav_projects') },
     ];
 

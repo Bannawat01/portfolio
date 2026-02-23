@@ -3,6 +3,7 @@
 import { useLanguage } from '@/context/LanguageContext';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+import { useState } from 'react';
 
 const SKILL_ICONS: Record<string, { icon: string; label: string }> = {
     'TypeScript': {
@@ -35,21 +36,27 @@ const SKILL_ICONS: Record<string, { icon: string; label: string }> = {
     },
 };
 
-function SkillBadge({ name }: { name: string }) {
+function SkillBadge({ name, isActive }: { name: string; isActive: boolean }) {
     const skill = SKILL_ICONS[name];
     if (!skill) return (
-        <span className="inline-flex items-center rounded-md bg-[#1a1a26] border border-[#2e2e45] px-3 py-1.5 text-xs font-medium text-[#b8b8cc]">
+        <span className={`inline-flex items-center rounded-md border px-3 py-1.5 text-xs font-medium transition-all duration-200 ${isActive
+            ? 'bg-[#1a1a26] border-[#8b7fff]/60 text-[#f0f0f8]'
+            : 'bg-[#13131c] border-[#2e2e45] text-[#8f8fa8]'
+            }`}>
             {name}
         </span>
     );
 
     return (
-        <span className="group inline-flex items-center gap-2 rounded-md bg-[#1a1a26] border border-[#2e2e45] px-3 py-1.5 text-xs font-medium text-[#b8b8cc] hover:border-[#3e3e58] hover:text-[#f0f0f8] transition-all duration-200">
+        <span className={`inline-flex items-center gap-2 rounded-md border px-3 py-1.5 text-xs font-medium transition-all duration-200 ${isActive
+            ? 'bg-[#1a1a26] border-[#8b7fff]/60 text-[#f0f0f8] shadow-[0_0_0_1px_rgba(139,127,255,0.18)]'
+            : 'bg-[#13131c] border-[#2e2e45] text-[#8f8fa8]'
+            }`}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
                 src={skill.icon}
                 alt={skill.label}
-                className="w-4 h-4 object-contain"
+                className={`h-4 w-4 object-contain transition-opacity duration-200 ${isActive ? 'opacity-100' : 'opacity-65'}`}
                 loading="lazy"
             />
             {skill.label}
@@ -59,15 +66,18 @@ function SkillBadge({ name }: { name: string }) {
 
 export default function Experience() {
     const { t } = useLanguage();
+    const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
     const experiences = [
         {
+            period: '2024 — Present',
             roleLabel: 'exp1_role_label',
             title: 'exp1_title',
             desc: 'exp1_desc',
             skills: ['TypeScript', 'Golang', 'JavaScript', 'HTML & CSS', 'Python'],
         },
         {
+            period: '2022 — 2024',
             roleLabel: 'exp2_role_label',
             title: 'exp2_title',
             desc: 'exp2_desc',
@@ -92,40 +102,59 @@ export default function Experience() {
                 </h2>
             </div>
 
-            <ol className="space-y-4">
+            <ol className="relative space-y-4 before:absolute before:bottom-0 before:left-[105px] before:top-0 before:hidden before:w-px before:bg-[#242436] lg:before:block">
                 {experiences.map((exp, index) => (
                     <motion.li
                         key={index}
+                        onMouseEnter={() => setActiveIndex(index)}
+                        onMouseLeave={() => setActiveIndex(null)}
+                        onFocusCapture={() => setActiveIndex(index)}
+                        onBlurCapture={() => setActiveIndex(null)}
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.3, delay: index * 0.1 }}
                     >
-                        <div className="group rounded-xl border border-[#242436] bg-[#13131c] p-6 transition-all duration-200 hover:border-[#2e2e45] hover:bg-[#1a1a26]">
+                        <div className="grid gap-3 lg:grid-cols-[88px_1fr] lg:gap-6">
+                            <div className="relative hidden lg:block">
+                                <p className={`pt-1 text-xs font-semibold uppercase tracking-widest transition-colors duration-200 ${activeIndex === index ? 'text-[#8b7fff]' : 'text-[#6e6e8a]'}`}>
+                                    {exp.period}
+                                </p>
+                                <span className={`absolute right-[-23px] top-2 h-3 w-3 rounded-full border-2 transition-all duration-200 ${activeIndex === index ? 'border-[#8b7fff] bg-[#8b7fff] shadow-[0_0_0_5px_rgba(139,127,255,0.12)]' : 'border-[#3e3e58] bg-[#13131c]'}`} />
+                            </div>
 
-                            {/* Role label */}
-                            <p className="text-xs font-semibold uppercase tracking-widest text-[#8b7fff] mb-2">
-                                {t(exp.roleLabel)}
-                            </p>
+                            <div className={`rounded-xl border bg-[#13131c] p-6 transition-all duration-200 ${activeIndex === null || activeIndex === index
+                                ? 'border-[#2e2e45] bg-[#1a1a26]'
+                                : 'border-[#242436] opacity-75'
+                                }`}>
 
-                            {/* Title */}
-                            <h3 className="text-base font-semibold text-[#f0f0f8] mb-3">
-                                {t(exp.title)}
-                            </h3>
+                                <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-[#6e6e8a] lg:hidden">
+                                    {exp.period}
+                                </p>
 
-                            {/* Description */}
-                            <p className="text-sm leading-relaxed text-[#b8b8cc] mb-5">
-                                {t(exp.desc)}
-                            </p>
+                                <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-[#8b7fff]">
+                                    {t(exp.roleLabel)}
+                                </p>
 
-                            {/* Skill badges with logos */}
-                            <ul className="flex flex-wrap gap-2" aria-label="Technologies">
-                                {exp.skills.map((skill, i) => (
-                                    <li key={i}>
-                                        <SkillBadge name={skill} />
-                                    </li>
-                                ))}
-                            </ul>
+                                <h3 className="mb-3 text-base font-semibold text-[#f0f0f8]">
+                                    {t(exp.title)}
+                                </h3>
+
+                                <p className="mb-5 text-sm leading-relaxed text-[#b8b8cc]">
+                                    {t(exp.desc)}
+                                </p>
+
+                                <ul className="flex flex-wrap gap-2" aria-label="Technologies">
+                                    {exp.skills.map((skill, i) => (
+                                        <li key={i}>
+                                            <SkillBadge
+                                                name={skill}
+                                                isActive={activeIndex === null || activeIndex === index}
+                                            />
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
                         </div>
                     </motion.li>
                 ))}
