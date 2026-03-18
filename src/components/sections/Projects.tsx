@@ -14,7 +14,7 @@ const langDot: Record<string, string> = {
 const projects = [
     {
         name: 'Trading-Vibe-v1',
-        url: 'https://trading-vibe-v1-git-master-bannawat01s-projects.vercel.app/',
+        url: 'https://trading-vibe-v1-sooty.vercel.app/',
         description: 'Dashboard for monitoring automated trading bot systems and signals.',
         language: 'JavaScript',
         type: 'live',
