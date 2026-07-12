@@ -2,7 +2,8 @@
 
 import { useLanguage } from '@/context/LanguageContext';
 import { motion } from 'framer-motion';
-import { Star, GitFork, ArrowUpRight, Globe } from 'lucide-react';
+import { Star, GitFork, ArrowUpRight } from 'lucide-react';
+import RepoRadarShowcase from '@/components/RepoRadarShowcase';
 
 const langDot: Record<string, string> = {
     TypeScript: '#3178c6',
@@ -14,10 +15,9 @@ const langDot: Record<string, string> = {
 const projects = [
     {
         name: 'Trading-Vibe-v1',
-        url: 'https://trading-vibe-v1-sooty.vercel.app/',
+        url: 'https://github.com/Bannawat01/trading-vibe-v1',
         description: 'Dashboard for monitoring automated trading bot systems and signals.',
         language: 'JavaScript',
-        type: 'live',
         stars: 0,
         forks: 0,
         updatedAt: 'Mar 2026',
@@ -80,10 +80,11 @@ export default function Projects() {
                 </h2>
             </div>
 
+            <RepoRadarShowcase />
+
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {projects.map((project, index) => {
                     const dot = langDot[project.language] ?? '#6e6e8a';
-                    const isLiveWebsite = project.type === 'live';
                     return (
                         <motion.li
                             key={project.name}
@@ -98,9 +99,7 @@ export default function Projects() {
                                 href={project.url}
                                 target="_blank"
                                 rel="noreferrer"
-                                className={`project-card group flex flex-col h-full rounded-xl p-5 ${
-                                    isLiveWebsite ? 'ring-1 ring-emerald-400/45 shadow-[0_0_0_1px_rgba(52,211,153,0.35),0_12px_40px_rgba(16,185,129,0.12)]' : ''
-                                }`}
+                                className="project-card group flex flex-col h-full rounded-xl p-5"
                             >
                                 {/* Repo name */}
                                 <div className="flex items-start justify-between gap-3 mb-3">
@@ -108,22 +107,9 @@ export default function Projects() {
                                         <span className="block text-sm font-semibold leading-tight text-[#f0f0f8] group-hover:text-white transition-colors">
                                             {project.name}
                                         </span>
-                                        {isLiveWebsite && (
-                                            <span className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-emerald-400/55 bg-emerald-400/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-emerald-300 sm:text-[11px]">
-                                                <span className="inline-flex h-4 w-4 items-center justify-center rounded-full border border-emerald-300/40 bg-emerald-400/15">
-                                                    <Globe className="h-2.5 w-2.5" />
-                                                </span>
-                                                <span className="sm:hidden">Live</span>
-                                                <span className="hidden sm:inline">Live Website</span>
-                                            </span>
-                                        )}
                                     </div>
                                     <span
-                                        className={`inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all sm:h-9 sm:w-9 ${
-                                            isLiveWebsite
-                                                ? 'border-emerald-400/45 bg-emerald-400/10 text-emerald-300 group-hover:bg-emerald-400/20'
-                                                : 'border-[#2b2b43] bg-[#161625] text-[#5d5d80] group-hover:border-[#3c3c5b] group-hover:text-[#8b7fff]'
-                                        }`}
+                                        className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#2b2b43] bg-[#161625] text-[#5d5d80] transition-all group-hover:border-[#3c3c5b] group-hover:text-[#8b7fff] sm:h-9 sm:w-9"
                                     >
                                         <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                                     </span>
