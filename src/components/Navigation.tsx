@@ -28,9 +28,9 @@ export default function Navigation() {
 
     const socials = [
         { href: 'https://github.com/Bannawat01', icon: Github, label: 'GitHub' },
-        { href: '#', icon: Linkedin, label: 'LinkedIn' },
+        { href: 'https://www.linkedin.com/in/bannawat/', icon: Linkedin, label: 'LinkedIn' },
         { href: 'https://www.facebook.com/bannawat.runttanarak', icon: Facebook, label: 'Facebook' },
-        { href: 'mailto:coach.ra47@gmail.com', icon: Mail, label: 'Email' },
+        { href: 'mailto:bannawat.work47@gmail.com', icon: Mail, label: 'Email' },
     ];
 
     return (

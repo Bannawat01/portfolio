@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
-import { ChevronLeft, ChevronRight, Gamepad2, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Gamepad2, Hammer, X } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
 
@@ -58,9 +58,19 @@ export default function SilentEmberShowcase() {
                 <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-[#2b2b43] bg-[#161625] text-[#8b7fff]">
                     <Gamepad2 className="h-4.5 w-4.5" />
                 </span>
-                <div>
-                    <h3 className="text-sm font-semibold text-[#f0f0f8]">{t('silent_ember_title')}</h3>
+                <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-center gap-2">
+                        <h3 className="text-sm font-semibold text-[#f0f0f8]">{t('silent_ember_title')}</h3>
+                        <span
+                            title={t('silent_ember_status_hint')}
+                            className="inline-flex items-center gap-1.5 rounded-full border border-[#f5a623]/40 bg-[#f5a623]/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-[#f5b955]"
+                        >
+                            <Hammer className="h-3 w-3" />
+                            {t('silent_ember_status')}
+                        </span>
+                    </div>
                     <p className="mt-1 text-sm leading-relaxed text-[#b8b8cc]">{t('silent_ember_desc')}</p>
+                    <p className="mt-1.5 text-xs text-[#6e6e8a]">{t('silent_ember_status_hint')}</p>
                 </div>
             </div>
 

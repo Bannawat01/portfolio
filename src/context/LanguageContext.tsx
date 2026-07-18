@@ -40,7 +40,9 @@ const translations = {
         view_resume: "View Résumé",
         resume_hint: "Click anywhere to close",
         silent_ember_title: "Silent Ember",
-        silent_ember_desc: "A horror game I designed and built — explore the house, uncover memories, and survive what lurks in the dark."
+        silent_ember_desc: "A horror game I designed and built — explore the house, uncover memories, and survive what lurks in the dark.",
+        silent_ember_status: "In Development",
+        silent_ember_status_hint: "Playable build coming soon"
     },
     th: {
         name: "บรรณวัชร รัตนรักษ์",
@@ -71,7 +73,9 @@ const translations = {
         view_resume: "ดูเรซูเม่",
         resume_hint: "คลิกที่ใดก็ได้เพื่อปิด",
         silent_ember_title: "Silent Ember",
-        silent_ember_desc: "เกมสยองขวัญที่ผมออกแบบและสร้างเอง สำรวจบ้าน ค้นหาความทรงจำ และเอาชีวิตรอดจากสิ่งที่ซ่อนอยู่ในความมืด"
+        silent_ember_desc: "เกมสยองขวัญที่ผมออกแบบและสร้างเอง สำรวจบ้าน ค้นหาความทรงจำ และเอาชีวิตรอดจากสิ่งที่ซ่อนอยู่ในความมืด",
+        silent_ember_status: "กำลังพัฒนา",
+        silent_ember_status_hint: "ตัวเกมให้เล่นเร็วๆ นี้"
     }
 };
 

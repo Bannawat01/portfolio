@@ -13,7 +13,36 @@ const langDot: Record<string, string> = {
     JavaScript: '#f1e05a',
 };
 
-const projects = [
+const projects: {
+    name: string;
+    url: string;
+    liveUrl?: string;
+    description: string;
+    language: string;
+    stars: number;
+    forks: number;
+    updatedAt: string;
+}[] = [
+    {
+        name: 'Albion-Market-AI',
+        url: 'https://www.albion-market-ai.online/',
+        liveUrl: 'https://www.albion-market-ai.online/',
+        description: 'AI-powered market price analytics for Albion Online — track and predict in-game item prices.',
+        language: 'TypeScript',
+        stars: 0,
+        forks: 0,
+        updatedAt: 'Jul 2026',
+    },
+    {
+        name: 'CopyUI',
+        url: 'https://copy-ui-nine.vercel.app/',
+        liveUrl: 'https://copy-ui-nine.vercel.app/',
+        description: 'Component library playground — browse, preview, and copy ready-to-use UI snippets.',
+        language: 'TypeScript',
+        stars: 0,
+        forks: 0,
+        updatedAt: 'Jun 2026',
+    },
     {
         name: 'Trading-Vibe-v1',
         url: 'https://github.com/Bannawat01/trading-vibe-v1',
@@ -107,8 +136,17 @@ export default function Projects() {
                                 {/* Repo name */}
                                 <div className="flex items-start justify-between gap-3 mb-3">
                                     <div className="min-w-0">
-                                        <span className="block text-sm font-semibold leading-tight text-[#f0f0f8] group-hover:text-white transition-colors">
-                                            {project.name}
+                                        <span className="flex items-center gap-2 text-sm font-semibold leading-tight text-[#f0f0f8] group-hover:text-white transition-colors">
+                                            <span className="truncate">{project.name}</span>
+                                            {project.liveUrl && (
+                                                <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-[#2ee6a6]/40 bg-[#2ee6a6]/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[#2ee6a6]">
+                                                    <span className="relative inline-flex h-1.5 w-1.5">
+                                                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#2ee6a6] opacity-60" />
+                                                        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#2ee6a6]" />
+                                                    </span>
+                                                    Live
+                                                </span>
+                                            )}
                                         </span>
                                     </div>
                                     <span
