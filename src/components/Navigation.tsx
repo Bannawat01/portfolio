@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import LanguageToggle from './LanguageToggle';
+import ResumeButton from './ResumeButton';
 import { useLanguage } from '@/context/LanguageContext';
 import { Github, Linkedin, Facebook, Mail } from 'lucide-react';
 
@@ -63,7 +63,7 @@ export default function Navigation() {
                     {t('description')}
                 </p>
 
-                <LanguageToggle />
+                <ResumeButton />
 
                 {/* Nav links */}
                 <nav className="hidden lg:block mt-10" aria-label="In-page jump links">

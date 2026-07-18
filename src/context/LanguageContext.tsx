@@ -36,7 +36,11 @@ const translations = {
         skills_group_mindset: "Mindset",
         view_github: "See everything on GitHub →",
         proj1_title: "My Projects on GitHub",
-        proj1_desc: "A mix of web apps, games, and experiments. Built with TypeScript, Golang, Godot, and whatever else seemed right at the time."
+        proj1_desc: "A mix of web apps, games, and experiments. Built with TypeScript, Golang, Godot, and whatever else seemed right at the time.",
+        view_resume: "View Résumé",
+        resume_hint: "Click anywhere to close",
+        silent_ember_title: "Silent Ember",
+        silent_ember_desc: "A horror game I designed and built — explore the house, uncover memories, and survive what lurks in the dark."
     },
     th: {
         name: "บรรณวัชร รัตนรักษ์",
@@ -63,7 +67,11 @@ const translations = {
         skills_group_mindset: "แนวคิดการทำงาน",
         view_github: "ดูทั้งหมดใน GitHub →",
         proj1_title: "โปรเจกต์ของผมใน GitHub",
-        proj1_desc: "รวมเว็บแอป เกม และของที่ลองทำมาหลายอย่าง สร้างด้วย TypeScript, Golang, Godot และอื่นๆ ตามแต่งานจะพาไป"
+        proj1_desc: "รวมเว็บแอป เกม และของที่ลองทำมาหลายอย่าง สร้างด้วย TypeScript, Golang, Godot และอื่นๆ ตามแต่งานจะพาไป",
+        view_resume: "ดูเรซูเม่",
+        resume_hint: "คลิกที่ใดก็ได้เพื่อปิด",
+        silent_ember_title: "Silent Ember",
+        silent_ember_desc: "เกมสยองขวัญที่ผมออกแบบและสร้างเอง สำรวจบ้าน ค้นหาความทรงจำ และเอาชีวิตรอดจากสิ่งที่ซ่อนอยู่ในความมืด"
     }
 };
 

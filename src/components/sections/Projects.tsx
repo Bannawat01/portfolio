@@ -4,6 +4,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { motion } from 'framer-motion';
 import { Star, GitFork, ArrowUpRight } from 'lucide-react';
 import RepoRadarShowcase from '@/components/RepoRadarShowcase';
+import SilentEmberShowcase from '@/components/SilentEmberShowcase';
 
 const langDot: Record<string, string> = {
     TypeScript: '#3178c6',
@@ -79,6 +80,8 @@ export default function Projects() {
                     {t('nav_projects')}
                 </h2>
             </div>
+
+            <SilentEmberShowcase />
 
             <RepoRadarShowcase />
 
