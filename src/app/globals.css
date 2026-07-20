@@ -77,3 +77,62 @@ body {
   box-shadow: 0 0 0 1px rgba(139, 127, 255, 0.08) inset,
               0 8px 32px rgba(139, 127, 255, 0.08);
 }
+
+/* ── Animated gradient text — slow pan, GPU-cheap ───────────────────── */
+.animate-gradient-text {
+  background-size: 220% auto;
+  animation: gradient-pan 6s ease-in-out infinite;
+}
+
+@keyframes gradient-pan {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ── Floating ambient orbs — transform-only, GPU compositing ────────── */
+.orb {
+  position: fixed;
+  border-radius: 9999px;
+  filter: blur(70px);
+  opacity: 0.5;
+  will-change: transform;
+  pointer-events: none;
+}
+
+.orb-1 {
+  top: -8%;
+  left: -6%;
+  width: 34vw;
+  height: 34vw;
+  max-width: 460px;
+  max-height: 460px;
+  background: radial-gradient(circle, rgba(139, 127, 255, 0.4), transparent 70%);
+  animation: orb-float-1 24s ease-in-out infinite;
+}
+
+.orb-2 {
+  bottom: -10%;
+  right: -8%;
+  width: 30vw;
+  height: 30vw;
+  max-width: 420px;
+  max-height: 420px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.32), transparent 70%);
+  animation: orb-float-2 30s ease-in-out infinite;
+}
+
+@keyframes orb-float-1 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(5vw, 7vh, 0) scale(1.12); }
+}
+
+@keyframes orb-float-2 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-6vw, -5vh, 0) scale(1.1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-gradient-text,
+  .orb-1,
+  .orb-2 { animation: none; }
+}

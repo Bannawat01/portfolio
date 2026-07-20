@@ -105,9 +105,10 @@ export default function Projects() {
             transition={{ duration: 0.4 }}
         >
             {/* Mobile sticky header */}
-            <div className="sticky top-0 z-20 -mx-6 mb-8 w-screen bg-[#0d0d14]/95 px-6 py-4 backdrop-blur-sm border-b border-[#242436] md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0 lg:border-0">
-                <h2 className="text-xs font-semibold uppercase tracking-widest text-[#6e6e8a]">
-                    {t('nav_projects')}
+            <div className="sticky top-0 z-20 -mx-6 mb-8 w-screen bg-[#0d0d14]/95 px-6 py-4 backdrop-blur-sm border-b border-[#242436] md:-mx-12 md:px-12 lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:border-0 lg:bg-transparent lg:backdrop-blur-none">
+                <h2 className="flex items-center gap-3 text-xs font-semibold uppercase tracking-widest text-[#6e6e8a]">
+                    <span className="text-[#8b7fff]">04.</span> {t('nav_projects')}
+                    <span className="hidden h-px flex-1 bg-[#242436] lg:block" />
                 </h2>
             </div>
 
@@ -117,7 +118,7 @@ export default function Projects() {
 
             <AiFetchHealerShowcase />
 
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {projects.map((project, index) => {
                     const dot = langDot[project.language] ?? '#6e6e8a';
                     return (
