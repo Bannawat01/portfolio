@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Star, GitFork, ArrowUpRight } from 'lucide-react';
 import RepoRadarShowcase from '@/components/RepoRadarShowcase';
 import SilentEmberShowcase from '@/components/SilentEmberShowcase';
+import AiFetchHealerShowcase from '@/components/AiFetchHealerShowcase';
 
 const langDot: Record<string, string> = {
     TypeScript: '#3178c6',
@@ -113,6 +114,8 @@ export default function Projects() {
             <SilentEmberShowcase />
 
             <RepoRadarShowcase />
+
+            <AiFetchHealerShowcase />
 
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {projects.map((project, index) => {
