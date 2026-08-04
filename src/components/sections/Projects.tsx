@@ -6,6 +6,7 @@ import { Star, GitFork, ArrowUpRight } from 'lucide-react';
 import RepoRadarShowcase from '@/components/RepoRadarShowcase';
 import SilentEmberShowcase from '@/components/SilentEmberShowcase';
 import AiFetchHealerShowcase from '@/components/AiFetchHealerShowcase';
+import WakefulShowcase from '@/components/WakefulShowcase';
 
 const langDot: Record<string, string> = {
     TypeScript: '#3178c6',
@@ -111,6 +112,8 @@ export default function Projects() {
                     <span className="hidden h-px flex-1 bg-[#242436] lg:block" />
                 </h2>
             </div>
+
+            <WakefulShowcase />
 
             <SilentEmberShowcase />
 
