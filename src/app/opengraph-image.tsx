@@ -5,7 +5,33 @@ export const alt = 'Bannawat Rattanarak - Portfolio';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
+async function loadInterFont(weight: number): Promise<ArrayBuffer> {
+  const cssUrl = `https://fonts.googleapis.com/css2?family=Inter:wght@${weight}&display=swap`;
+  const css = await (
+    await fetch(cssUrl, {
+      headers: {
+        // Old-Chrome UA forces Google Fonts to serve TTF instead of woff2 — satori (used by next/og) can't parse woff2.
+        'User-Agent':
+          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36',
+      },
+    })
+  ).text();
+
+  const match = css.match(/src: url\(([^)]+)\) format\('(opentype|truetype)'\)/);
+  if (!match) throw new Error(`failed to resolve Inter ${weight} font url`);
+
+  const res = await fetch(match[1]);
+  if (!res.ok) throw new Error(`failed to fetch Inter ${weight} font data`);
+  return res.arrayBuffer();
+}
+
 export default async function Image() {
+  const [interBold, interSemibold, interMedium] = await Promise.all([
+    loadInterFont(700),
+    loadInterFont(600),
+    loadInterFont(500),
+  ]);
+
   return new ImageResponse(
     (
       <div
@@ -74,6 +100,13 @@ export default async function Image() {
         </div>
       </div>
     ),
-    { ...size }
+    {
+      ...size,
+      fonts: [
+        { name: 'Inter', data: interBold, weight: 700, style: 'normal' },
+        { name: 'Inter', data: interSemibold, weight: 600, style: 'normal' },
+        { name: 'Inter', data: interMedium, weight: 500, style: 'normal' },
+      ],
+    }
   );
 }
