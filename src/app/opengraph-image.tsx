@@ -26,11 +26,22 @@ async function loadInterFont(weight: number): Promise<ArrayBuffer> {
 }
 
 export default async function Image() {
-  const [interBold, interSemibold, interMedium] = await Promise.all([
-    loadInterFont(700),
-    loadInterFont(600),
-    loadInterFont(500),
-  ]);
+  let fonts: { name: string; data: ArrayBuffer; weight: 500 | 600 | 700; style: 'normal' }[] | undefined;
+
+  try {
+    const [interBold, interSemibold, interMedium] = await Promise.all([
+      loadInterFont(700),
+      loadInterFont(600),
+      loadInterFont(500),
+    ]);
+    fonts = [
+      { name: 'Inter', data: interBold, weight: 700, style: 'normal' },
+      { name: 'Inter', data: interSemibold, weight: 600, style: 'normal' },
+      { name: 'Inter', data: interMedium, weight: 500, style: 'normal' },
+    ];
+  } catch (err) {
+    console.error('opengraph-image: failed to load Inter font, falling back to default sans-serif', err);
+  }
 
   return new ImageResponse(
     (
@@ -100,13 +111,6 @@ export default async function Image() {
         </div>
       </div>
     ),
-    {
-      ...size,
-      fonts: [
-        { name: 'Inter', data: interBold, weight: 700, style: 'normal' },
-        { name: 'Inter', data: interSemibold, weight: 600, style: 'normal' },
-        { name: 'Inter', data: interMedium, weight: 500, style: 'normal' },
-      ],
-    }
+    fonts ? { ...size, fonts } : { ...size }
   );
 }
