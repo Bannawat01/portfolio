@@ -3,6 +3,7 @@
 import { useLanguage } from '@/context/LanguageContext';
 import { motion } from 'framer-motion';
 import { Star, GitFork, ArrowUpRight } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import RepoRadarShowcase from '@/components/RepoRadarShowcase';
 import SilentEmberShowcase from '@/components/SilentEmberShowcase';
 import AiFetchHealerShowcase from '@/components/AiFetchHealerShowcase';
@@ -15,85 +16,114 @@ const langDot: Record<string, string> = {
     JavaScript: '#f1e05a',
 };
 
+const GITHUB_OWNER = 'Bannawat01';
+
 const projects: {
     name: string;
+    repo: string;
     url: string;
     liveUrl?: string;
     description: string;
     language: string;
-    stars: number;
-    forks: number;
     updatedAt: string;
 }[] = [
     {
         name: 'Albion-Market-AI',
+        repo: 'Albion-Market-AI',
         url: 'https://www.albion-market-ai.online/',
         liveUrl: 'https://www.albion-market-ai.online/',
         description: 'AI-powered market price analytics for Albion Online — track and predict in-game item prices.',
         language: 'TypeScript',
-        stars: 0,
-        forks: 0,
         updatedAt: 'Jul 2026',
     },
     {
         name: 'CopyUI',
+        repo: 'CopyUI',
         url: 'https://copy-ui-nine.vercel.app/',
         liveUrl: 'https://copy-ui-nine.vercel.app/',
         description: 'Component library playground — browse, preview, and copy ready-to-use UI snippets.',
         language: 'TypeScript',
-        stars: 0,
-        forks: 0,
         updatedAt: 'Jun 2026',
     },
     {
         name: 'Trading-Vibe-v1',
+        repo: 'trading-vibe-v1',
         url: 'https://github.com/Bannawat01/trading-vibe-v1',
         description: 'Dashboard for monitoring automated trading bot systems and signals.',
         language: 'JavaScript',
-        stars: 0,
-        forks: 0,
         updatedAt: 'Mar 2026',
     },
     {
         name: 'LaekHub-Server',
+        repo: 'LaekHub-Server',
         url: 'https://github.com/Bannawat01/LaekHub-Server',
         description: 'Backend server for LaekHub — a real-time hub management platform.',
         language: 'TypeScript',
-        stars: 0,
-        forks: 0,
         updatedAt: 'Feb 2026',
     },
     {
         name: 'MedScan-AI',
+        repo: 'MedScan-AI',
         url: 'https://github.com/Bannawat01/MedScan-AI',
         description: 'AI-powered medical scan analysis tool using the Gemini API.',
         language: 'TypeScript',
-        stars: 0,
-        forks: 0,
         updatedAt: 'Feb 2026',
     },
     {
         name: 'project-shop-api',
+        repo: 'project-shop-api',
         url: 'https://github.com/Bannawat01/project-shop-api',
         description: 'High-performance e-commerce API built with Go — products, orders, auth.',
         language: 'Go',
-        stars: 0,
-        forks: 0,
         updatedAt: 'Jan 2026',
     },
     {
         name: 'TinnerApp',
+        repo: 'TinnerApp',
         url: 'https://github.com/Bannawat01/TinnerApp',
         description: 'A swipe-based matching app inspired by modern dating UX.',
         language: 'TypeScript',
-        stars: 0,
-        forks: 0,
         updatedAt: 'Feb 2025',
     },
 ];
 
+type RepoStats = { stars: number; forks: number };
+
 export default function Projects() {
     const { t } = useLanguage();
+    const [stats, setStats] = useState<Record<string, RepoStats>>({});
+
+    useEffect(() => {
+        let alive = true;
+        const ctrl = new AbortController();
+        const timer = setTimeout(() => ctrl.abort(), 8000);
+
+        Promise.all(
+            projects.map((p) =>
+                fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${p.repo}`, { signal: ctrl.signal })
+                    .then((r) => (r.ok ? r.json() : null))
+                    .then((data: { stargazers_count?: number; forks_count?: number } | null) =>
+                        data ? [p.repo, { stars: data.stargazers_count ?? 0, forks: data.forks_count ?? 0 }] as const : null
+                    )
+                    .catch(() => null)
+            )
+        )
+            .then((results) => {
+                if (!alive) return;
+                const next: Record<string, RepoStats> = {};
+                for (const r of results) {
+                    if (r) next[r[0]] = r[1];
+                }
+                setStats(next);
+            })
+            .finally(() => clearTimeout(timer));
+
+        return () => {
+            alive = false;
+            ctrl.abort();
+            clearTimeout(timer);
+        };
+    }, []);
 
     return (
         <motion.section
@@ -124,6 +154,7 @@ export default function Projects() {
             <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {projects.map((project, index) => {
                     const dot = langDot[project.language] ?? '#6e6e8a';
+                    const repoStats = stats[project.repo];
                     return (
                         <motion.li
                             key={project.name}
@@ -174,14 +205,16 @@ export default function Projects() {
                                         <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: dot }} />
                                         <span>{project.language}</span>
                                     </div>
-                                    <div className="flex items-center gap-3">
-                                        <span className="flex items-center gap-1">
-                                            <Star className="h-3.5 w-3.5" />{project.stars}
-                                        </span>
-                                        <span className="flex items-center gap-1">
-                                            <GitFork className="h-3.5 w-3.5" />{project.forks}
-                                        </span>
-                                    </div>
+                                    {repoStats && (
+                                        <div className="flex items-center gap-3">
+                                            <span className="flex items-center gap-1">
+                                                <Star className="h-3.5 w-3.5" />{repoStats.stars}
+                                            </span>
+                                            <span className="flex items-center gap-1">
+                                                <GitFork className="h-3.5 w-3.5" />{repoStats.forks}
+                                            </span>
+                                        </div>
+                                    )}
                                 </div>
                             </a>
                         </motion.li>

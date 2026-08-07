@@ -7,31 +7,31 @@ import { useState } from 'react';
 
 const SKILL_ICONS: Record<string, { icon: string; label: string }> = {
     'TypeScript': {
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg',
+        icon: '/icons/typescript-original.svg',
         label: 'TypeScript',
     },
     'Golang': {
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original-wordmark.svg',
+        icon: '/icons/go-original-wordmark.svg',
         label: 'Go',
     },
     'JavaScript': {
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg',
+        icon: '/icons/javascript-original.svg',
         label: 'JavaScript',
     },
     'HTML & CSS': {
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg',
+        icon: '/icons/html5-original.svg',
         label: 'HTML & CSS',
     },
     'Python': {
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg',
+        icon: '/icons/python-original.svg',
         label: 'Python',
     },
     'Unity': {
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/unity/unity-original.svg',
+        icon: '/icons/unity-original.svg',
         label: 'Unity',
     },
     'Godot': {
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/godot/godot-original.svg',
+        icon: '/icons/godot-original.svg',
         label: 'Godot',
     },
 };

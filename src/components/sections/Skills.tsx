@@ -6,51 +6,51 @@ import { Code2, Gamepad2, Joystick, Cpu } from 'lucide-react';
 
 const SKILL_LOGOS: Record<string, { icon: string; label: string }> = {
     TypeScript: {
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg',
+        icon: '/icons/typescript-original.svg',
         label: 'TypeScript',
     },
     Golang: {
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original-wordmark.svg',
+        icon: '/icons/go-original-wordmark.svg',
         label: 'Golang',
     },
     JavaScript: {
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg',
+        icon: '/icons/javascript-original.svg',
         label: 'JavaScript',
     },
     Python: {
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg',
+        icon: '/icons/python-original.svg',
         label: 'Python',
     },
     'Node.js': {
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg',
+        icon: '/icons/nodejs-original.svg',
         label: 'Node.js',
     },
     PostgreSQL: {
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg',
+        icon: '/icons/postgresql-original.svg',
         label: 'PostgreSQL',
     },
     Unity: {
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/unity/unity-original.svg',
+        icon: '/icons/unity-original.svg',
         label: 'Unity',
     },
     Godot: {
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/godot/godot-original.svg',
+        icon: '/icons/godot-original.svg',
         label: 'Godot',
     },
     'C#': {
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg',
+        icon: '/icons/csharp-original.svg',
         label: 'C#',
     },
     Git: {
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg',
+        icon: '/icons/git-original.svg',
         label: 'Git',
     },
     Docker: {
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg',
+        icon: '/icons/docker-original.svg',
         label: 'Docker',
     },
     Figma: {
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg',
+        icon: '/icons/figma-original.svg',
         label: 'Figma',
     },
 };
