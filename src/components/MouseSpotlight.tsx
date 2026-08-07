@@ -1,32 +1,49 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function MouseSpotlight() {
-    const [position, setPosition] = useState({ x: 0, y: 0 });
+    const elRef = useRef<HTMLDivElement>(null);
     const [isHoverable, setIsHoverable] = useState(false);
 
     useEffect(() => {
         // Only show spotlight on devices that support hover (desktop)
-        if (window.matchMedia('(hover: hover)').matches) {
-            setIsHoverable(true);
-            const updateMousePosition = (e: MouseEvent) => {
-                setPosition({ x: e.clientX, y: e.clientY });
-            };
+        if (!window.matchMedia('(hover: hover)').matches) return;
+        setIsHoverable(true);
 
-            window.addEventListener('mousemove', updateMousePosition);
-            return () => window.removeEventListener('mousemove', updateMousePosition);
-        }
+        let rafId: number | null = null;
+        let lastX = 0;
+        let lastY = 0;
+
+        const applyPosition = () => {
+            rafId = null;
+            const el = elRef.current;
+            if (!el) return;
+            el.style.setProperty('--x', `${lastX}px`);
+            el.style.setProperty('--y', `${lastY}px`);
+        };
+
+        const updateMousePosition = (e: MouseEvent) => {
+            lastX = e.clientX;
+            lastY = e.clientY;
+            if (rafId === null) {
+                rafId = requestAnimationFrame(applyPosition);
+            }
+        };
+
+        window.addEventListener('mousemove', updateMousePosition);
+        return () => {
+            window.removeEventListener('mousemove', updateMousePosition);
+            if (rafId !== null) cancelAnimationFrame(rafId);
+        };
     }, []);
 
     if (!isHoverable) return null;
 
     return (
         <div
-            className="pointer-events-none fixed inset-0 z-30 transition duration-300"
-            style={{
-                background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(124, 111, 255, 0.05), transparent 70%)`
-            }}
+            ref={elRef}
+            className="mouse-spotlight pointer-events-none fixed inset-0 z-30 transition duration-300"
         />
     );
 }

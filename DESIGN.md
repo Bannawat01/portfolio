@@ -74,10 +74,11 @@ This is the part that matters for perf. The site previously lagged hard on Brave
 - `.animate-gradient-text` — `background-position` pan on the hero name only. One instance per page, not reusable as a utility for body text.
 - `ScrollProgress` — single `useSpring`-driven `scaleX` on a fixed 3px bar. Cheap, keep as-is.
 - `MouseSpotlight` — one `radial-gradient` following the cursor, gated behind `matchMedia('(hover: hover)')` so it never runs on touch devices. Do not add a second cursor-follow effect on top of it.
+- Cursor-follow / mouse-position effects must drive CSS custom properties (`element.style.setProperty('--x', ...)`) via a ref + `requestAnimationFrame`-throttled handler — never `setState` on every raw `mousemove`. `MouseSpotlight` used to call `setState(x, y)` per pixel of movement, forcing a full React re-render and a full-viewport `radial-gradient` repaint on every mouse event; this was the largest single cause of the Brave lag (see below). Fixed by tracking position in a ref, writing `--x`/`--y` directly to the DOM in a rAF-throttled handler, and moving the gradient itself into a CSS class keyed off those custom properties.
 
 ### Allowed, moderate — use sparingly
 
-- `backdrop-filter: blur()` — **capped at 6-10px**, and only on elements that do NOT sit above the animated orbs' likely travel path, or that are small/short-lived (mobile sticky headers). `.project-card` uses `blur(10px)`; do not raise this. If you add a new blurred surface, keep it off the areas the orbs drift through (orbs are positioned top-left / bottom-right — keep large blurred panels out of those corners, or reduce orb opacity further before adding more blur).
+- `backdrop-filter: blur()` — **capped at 6-10px**, and only on elements that do NOT sit above the animated orbs' likely travel path, or that are small/short-lived (mobile sticky headers). If you add a new blurred surface, keep it off the areas the orbs drift through (orbs are positioned top-left / bottom-right — keep large blurred panels out of those corners, or reduce orb opacity further before adding more blur).
 - `animate-ping` (Tailwind) for the small "Live" status dots — cheap because the element is tiny (a few px), not because `animate-ping` is generally free.
 - Per-card unique `whileHover` with a spring — fine on ≤10 cards on screen at once. Don't add spring physics to list items in a 50+ row list.
 
@@ -89,6 +90,7 @@ This is the part that matters for perf. The site previously lagged hard on Brave
 - `filter: blur()` above ~90px anywhere. Blur cost scales roughly with radius²; 48-70px is the ceiling that's been perf-verified.
 - New global libraries for animation (GSAP, Lenis, anime.js, etc.) unless a section specifically needs scroll-scrubbed effects that Framer Motion's `whileInView` genuinely can't do. Framer Motion is already a dependency — don't duplicate its job with a second animation library "for one section." (The PIXZEN/Hermes explorations pulled in `gsap` + `lenis` + `split-type`; none of that survived into the current dark-theme portfolio. If reintroducing a GSAP-driven section, remove it fully if the direction gets reverted — don't leave dead deps in `package.json`.)
 - Uncapped `vw`-sized blurred elements (no `max-width`/`max-height`). Always cap absolute pixel size so wide monitors don't get a bigger, more expensive blur than a laptop was tested on.
+- `backdrop-filter` on `.project-card`. Removed for perf — it was the second-largest compositor cost after the `MouseSpotlight` `setState`-per-`mousemove` bug (see "Allowed, cheap" above): a `blur(10px)` surface recomputing every frame under the animated orbs, stacked across up to a dozen cards on screen at once. Replaced with a plain higher-opacity solid background (`rgba(19,19,28,0.9)`) — same dark-card read, no blur compositing.
 
 ### When adding a new "showcase" card (RepoRadar-style)
 
