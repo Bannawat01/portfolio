@@ -53,7 +53,7 @@ export default function SilentEmberShowcase() {
     const { t } = useLanguage();
 
     return (
-        <div className="mb-8 rounded-xl border border-[#242436] bg-[#12121c] overflow-hidden">
+        <div id="silent-ember" className="mb-8 rounded-xl border border-[#242436] bg-[#12121c] overflow-hidden scroll-mt-16 lg:scroll-mt-24">
             {/* Header */}
             <div className="flex items-start gap-3 p-5 pb-4">
                 <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-[#2b2b43] bg-[#161625] text-[#8b7fff]">

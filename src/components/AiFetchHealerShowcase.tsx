@@ -101,7 +101,8 @@ export default function AiFetchHealerShowcase() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.4 }}
-            className="project-card mb-3 rounded-xl p-5 ring-1 ring-[#2ee6a6]/25 shadow-[0_0_0_1px_rgba(46,230,166,0.10),0_12px_40px_rgba(46,230,166,0.08)]"
+            id="ai-fetch-healer"
+            className="project-card mb-3 rounded-xl p-5 ring-1 ring-[#2ee6a6]/25 shadow-[0_0_0_1px_rgba(46,230,166,0.10),0_12px_40px_rgba(46,230,166,0.08)] scroll-mt-16 lg:scroll-mt-24"
         >
             {/* Header */}
             <div className="mb-4 flex items-start justify-between gap-3">

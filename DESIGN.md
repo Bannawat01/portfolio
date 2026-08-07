@@ -63,6 +63,8 @@ Section header pattern is fixed:
 ```
 Reuse this exact shape for any new section. Don't design a fifth header style.
 
+The hero (`Navigation.tsx`) no longer uses a separate role line + description paragraph — it's a single sentence-style paragraph built from ordered `hero_seg*` / `hero_link_*` keys in `LanguageContext.tsx`, with inline bold underlined `<a>` tags carrying the proof points (REST APIs, RepoRadar, ai-fetch-healer, Silent Ember) instead of a standalone tagline. Each linked showcase card carries its own scroll anchor for this to deep-link into (`id="repo-radar"`, `id="ai-fetch-healer"`, `id="silent-ember"`, plus `scroll-mt-16 lg:scroll-mt-24` so the sticky header doesn't cover the target). Follow the same `id` + `scroll-mt` convention on any future showcase card that the hero or nav should be able to deep-link to.
+
 ## 3. Component budget — what's allowed, what isn't
 
 This is the part that matters for perf. The site previously lagged hard on Brave because of **animated backgrounds sitting under `backdrop-filter: blur()` cards** — the browser had to recompute the blur sample every frame. Rules below exist to prevent that regressing.

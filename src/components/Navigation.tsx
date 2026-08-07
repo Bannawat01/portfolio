@@ -90,15 +90,25 @@ export default function Navigation() {
                     </a>
                 </motion.h1>
 
-                {/* Role */}
-                <motion.p variants={item} className="mt-4 inline-flex items-center gap-2 text-lg font-medium text-[#8b7fff]">
-                    <span className="h-px w-8 bg-gradient-to-r from-[#8b7fff] to-transparent" />
-                    {t('role')}
-                </motion.p>
-
-                {/* Description */}
+                {/* Hero sentence — inline bold clickable proof points */}
                 <motion.p variants={item} className="mt-5 max-w-2xl text-base leading-relaxed text-[#b8b8cc]">
-                    {t('description')}
+                    {t('hero_seg1')}
+                    <a href="#projects" className="font-semibold text-[#f0f0f8] underline decoration-[#8b7fff]/40 underline-offset-4 hover:decoration-[#8b7fff] hover:text-[#8b7fff] transition-colors duration-200">
+                        {t('hero_link_api')}
+                    </a>
+                    {t('hero_seg2')}
+                    <a href="#repo-radar" className="font-semibold text-[#f0f0f8] underline decoration-[#8b7fff]/40 underline-offset-4 hover:decoration-[#8b7fff] hover:text-[#8b7fff] transition-colors duration-200">
+                        {t('hero_link_bot')}
+                    </a>
+                    {t('hero_seg3')}
+                    <a href="#ai-fetch-healer" className="font-semibold text-[#f0f0f8] underline decoration-[#8b7fff]/40 underline-offset-4 hover:decoration-[#8b7fff] hover:text-[#8b7fff] transition-colors duration-200">
+                        {t('hero_link_npm')}
+                    </a>
+                    {t('hero_seg4')}
+                    <a href="#silent-ember" className="font-semibold text-[#f0f0f8] underline decoration-[#8b7fff]/40 underline-offset-4 hover:decoration-[#8b7fff] hover:text-[#8b7fff] transition-colors duration-200">
+                        {t('hero_link_ember')}
+                    </a>
+                    {t('hero_seg5')}
                 </motion.p>
 
                 <motion.div variants={item}>
