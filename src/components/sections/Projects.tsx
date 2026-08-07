@@ -29,7 +29,7 @@ const projects: {
 }[] = [
     {
         name: 'Albion-Market-AI',
-        repo: 'Albion-Market-AI',
+        repo: 'albion-api',
         url: 'https://www.albion-market-ai.online/',
         liveUrl: 'https://www.albion-market-ai.online/',
         description: 'AI-powered market price analytics for Albion Online — track and predict in-game item prices.',
