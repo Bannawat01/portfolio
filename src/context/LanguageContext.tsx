@@ -13,6 +13,7 @@ interface LanguageContextType {
 const translations = {
     en: {
         name: "Bannawat Rattanarak",
+        role_line: "Full-Stack & Game Developer",
         hero_seg1: "I build backend-heavy systems — ",
         hero_link_api: "REST APIs",
         hero_seg2: ", ",
@@ -53,6 +54,7 @@ const translations = {
     },
     th: {
         name: "บรรณวัชร รัตนรักษ์",
+        role_line: "Full-Stack และ Game Developer",
         hero_seg1: "ผมสร้างระบบฝั่ง backend เป็นหลัก — ",
         hero_link_api: "REST API",
         hero_seg2: ", ",

@@ -52,60 +52,61 @@ export default function Navigation() {
             animate="show"
         >
             <div>
-                {/* Status badge */}
+                {/* Status badge — mono, flat, no glow */}
                 <motion.div
                     variants={item}
-                    className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#2ee6a6]/30 bg-[#2ee6a6]/[0.07] px-3 py-1.5"
+                    className="mb-7 inline-flex items-center gap-2 rounded-full border border-[#2ee6a6]/30 bg-[#2ee6a6]/[0.06] px-3 py-1.5"
                 >
                     <span className="relative inline-flex h-2 w-2">
                         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#2ee6a6] opacity-70" />
                         <span className="relative inline-flex h-2 w-2 rounded-full bg-[#2ee6a6]" />
                     </span>
-                    <span className="text-[11px] font-semibold uppercase tracking-wider text-[#7ff0c8]">
+                    <span className="font-mono text-[10.5px] font-medium uppercase tracking-[0.18em] text-[#7ff0c8]">
                         Open for Internship
                     </span>
                 </motion.div>
 
-                {/* Avatar — gradient ring */}
+                {/* Avatar — flat frame, no gradient glow ring */}
                 <motion.div
                     variants={item}
-                    whileHover={{ scale: 1.06, rotate: -2 }}
-                    transition={{ type: 'spring', stiffness: 300, damping: 18 }}
-                    className="mb-6 w-[68px] h-[68px] rounded-2xl bg-gradient-to-br from-[#8b7fff] via-[#6d5cff] to-[#3178c6] p-[2px] shadow-[0_0_24px_rgba(139,127,255,0.25)]"
+                    className="mb-7 w-16 h-16 rounded-xl border border-[var(--border-2)] overflow-hidden bg-[var(--surface)]"
                 >
-                    <div className="w-full h-full rounded-[14px] overflow-hidden bg-[#1a1a26]">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                            src="/me.jpg"
-                            alt="Bannawat Rattanarak"
-                            className="w-full h-full object-cover"
-                        />
-                    </div>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                        src="/me.jpg"
+                        alt="Bannawat Rattanarak"
+                        className="w-full h-full object-cover grayscale-[15%]"
+                    />
                 </motion.div>
 
-                {/* Name — animated gradient display */}
-                <motion.h1 variants={item} className="text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl leading-[1.02]">
-                    <a href="/" className="animate-gradient-text bg-gradient-to-r from-white via-[#8b7fff] to-white bg-clip-text text-transparent transition-opacity duration-200 hover:opacity-80">
+                {/* Name — serif display, static, no animated gradient sheen */}
+                <motion.h1 variants={item} className="font-serif text-5xl font-normal tracking-tight text-[var(--text-primary)] sm:text-6xl lg:text-7xl leading-[1.05]">
+                    <a href="/" className="transition-opacity duration-200 hover:opacity-80">
                         {t('name')}
                     </a>
                 </motion.h1>
 
-                {/* Hero sentence — inline bold clickable proof points */}
-                <motion.p variants={item} className="mt-5 max-w-2xl text-base leading-relaxed text-[#b8b8cc]">
+                {/* Role line — mono, sets the "developer" register without a tagline */}
+                <motion.p variants={item} className="mt-3 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--accent)]">
+                    {t('role_line')}
+                </motion.p>
+
+                {/* Hero sentence — inline accent-colored clickable proof points */}
+                <motion.p variants={item} className="mt-5 max-w-2xl text-base leading-relaxed text-[var(--text-body)]">
                     {t('hero_seg1')}
-                    <a href="#projects" className="font-semibold text-[#f0f0f8] underline decoration-[#8b7fff]/40 underline-offset-4 hover:decoration-[#8b7fff] hover:text-[#8b7fff] transition-colors duration-200">
+                    <a href="#projects" className="font-semibold text-[var(--text-primary)] underline decoration-[var(--accent)]/40 underline-offset-4 hover:decoration-[var(--accent)] hover:text-[var(--accent)] transition-colors duration-200">
                         {t('hero_link_api')}
                     </a>
                     {t('hero_seg2')}
-                    <a href="#repo-radar" className="font-semibold text-[#f0f0f8] underline decoration-[#8b7fff]/40 underline-offset-4 hover:decoration-[#8b7fff] hover:text-[#8b7fff] transition-colors duration-200">
+                    <a href="#repo-radar" className="font-semibold text-[var(--text-primary)] underline decoration-[var(--accent)]/40 underline-offset-4 hover:decoration-[var(--accent)] hover:text-[var(--accent)] transition-colors duration-200">
                         {t('hero_link_bot')}
                     </a>
                     {t('hero_seg3')}
-                    <a href="#ai-fetch-healer" className="font-semibold text-[#f0f0f8] underline decoration-[#8b7fff]/40 underline-offset-4 hover:decoration-[#8b7fff] hover:text-[#8b7fff] transition-colors duration-200">
+                    <a href="#ai-fetch-healer" className="font-semibold text-[var(--text-primary)] underline decoration-[var(--accent)]/40 underline-offset-4 hover:decoration-[var(--accent)] hover:text-[var(--accent)] transition-colors duration-200">
                         {t('hero_link_npm')}
                     </a>
                     {t('hero_seg4')}
-                    <a href="#silent-ember" className="font-semibold text-[#f0f0f8] underline decoration-[#8b7fff]/40 underline-offset-4 hover:decoration-[#8b7fff] hover:text-[#8b7fff] transition-colors duration-200">
+                    <a href="#silent-ember" className="font-semibold text-[var(--text-primary)] underline decoration-[var(--accent)]/40 underline-offset-4 hover:decoration-[var(--accent)] hover:text-[var(--accent)] transition-colors duration-200">
                         {t('hero_link_ember')}
                     </a>
                     {t('hero_seg5')}
@@ -115,21 +116,21 @@ export default function Navigation() {
                     <ResumeButton />
                 </motion.div>
 
-                {/* Nav links */}
-                <motion.nav variants={item} className="mt-10 border-t border-[#242436] pt-6" aria-label="In-page jump links">
+                {/* Nav links — mono, underline-on-active instead of glow */}
+                <motion.nav variants={item} className="mt-10 border-t border-[var(--border)] pt-6" aria-label="In-page jump links">
                     <ul className="flex flex-wrap gap-x-6 gap-y-2">
                         {navLinks.map((link) => (
                             <li key={link.id}>
                                 <a
                                     href={`#${link.id}`}
-                                    className={`group flex items-center gap-2 text-xs font-semibold uppercase tracking-widest transition-all duration-200 ${activeSection === link.id
-                                        ? 'text-[#f0f0f8]'
-                                        : 'text-[#6e6e8a] hover:text-[#b8b8cc]'
+                                    className={`group flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-[0.18em] transition-all duration-200 ${activeSection === link.id
+                                        ? 'text-[var(--text-primary)]'
+                                        : 'text-[var(--text-muted)] hover:text-[var(--text-body)]'
                                         }`}
                                 >
                                     <span className={`block h-px transition-all duration-300 group-hover:w-8 ${activeSection === link.id
-                                        ? 'w-8 bg-[#8b7fff]'
-                                        : 'w-4 bg-[#2e2e45] group-hover:bg-[#8b7fff]'
+                                        ? 'w-8 bg-[var(--accent)]'
+                                        : 'w-4 bg-[var(--border-2)] group-hover:bg-[var(--accent)]'
                                         }`} />
                                     {link.label}
                                 </a>
@@ -151,7 +152,7 @@ export default function Navigation() {
                             title={label}
                             whileHover={{ y: -3 }}
                             whileTap={{ scale: 0.9 }}
-                            className="flex items-center justify-center w-10 h-10 rounded-lg text-[#6e6e8a] hover:text-[#8b7fff] hover:bg-[#8b7fff]/10 border border-transparent hover:border-[#8b7fff]/30 transition-colors duration-200"
+                            className="flex items-center justify-center w-10 h-10 rounded-lg text-[var(--text-muted)] hover:text-[var(--accent)] hover:bg-[var(--accent-dim)] border border-transparent hover:border-[var(--accent)]/30 transition-colors duration-200"
                         >
                             <Icon className="h-4 w-4" />
                         </motion.a>

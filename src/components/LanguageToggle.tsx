@@ -7,17 +7,17 @@ export default function LanguageToggle() {
     const isEn = language === 'en';
 
     return (
-        <div className="fixed top-4 right-4 z-50 inline-flex items-center rounded-lg bg-[#16161e]/90 backdrop-blur-sm border border-[#1e1e2a] p-0.5 shadow-lg md:top-6 md:right-6">
+        <div className="fixed top-4 right-4 z-50 inline-flex items-center rounded-md bg-[var(--surface)]/95 backdrop-blur-sm border border-[var(--border)] p-0.5 md:top-6 md:right-6">
             <button
                 onClick={() => setLanguage('en')}
-                className={`px-4 py-1.5 rounded-md text-xs font-medium uppercase tracking-wider transition-all duration-200 focus:outline-none ${isEn ? 'bg-[#7c6fff] text-white' : 'text-[#555566] hover:text-[#888899]'
+                className={`px-3.5 py-1.5 rounded-[4px] font-mono text-[11px] font-medium uppercase tracking-wider transition-all duration-200 focus:outline-none ${isEn ? 'bg-[var(--accent)] text-[var(--accent-ink)]' : 'text-[var(--text-muted)] hover:text-[var(--text-body)]'
                     }`}
             >
                 EN
             </button>
             <button
                 onClick={() => setLanguage('th')}
-                className={`px-4 py-1.5 rounded-md text-xs font-medium uppercase tracking-wider transition-all duration-200 focus:outline-none ${!isEn ? 'bg-[#7c6fff] text-white' : 'text-[#555566] hover:text-[#888899]'
+                className={`px-3.5 py-1.5 rounded-[4px] font-mono text-[11px] font-medium uppercase tracking-wider transition-all duration-200 focus:outline-none ${!isEn ? 'bg-[var(--accent)] text-[var(--accent-ink)]' : 'text-[var(--text-muted)] hover:text-[var(--text-body)]'
                     }`}
             >
                 TH

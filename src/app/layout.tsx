@@ -1,9 +1,20 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Fraunces, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { LanguageProvider } from '@/context/LanguageContext';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  variable: '--font-fraunces',
+  style: ['normal', 'italic'],
+  weight: ['300', '400', '500', '600'],
+});
+const jbMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jbmono',
+  weight: ['400', '500', '600'],
+});
 
 const SITE_URL = 'https://bannawat.site';
 const TITLE = 'Bannawat Rattanarak - Portfolio';
@@ -51,8 +62,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} scroll-smooth`}>
-      <body className="bg-[#0d0d14] text-[#b8b8cc] antialiased">
+    <html lang="en" className={`${inter.variable} ${fraunces.variable} ${jbMono.variable} scroll-smooth`}>
+      <body className="bg-[#0c0a08] text-[#c7bda8] antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}

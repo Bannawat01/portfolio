@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type CSSProperties } from 'react';
 import { motion } from 'framer-motion';
 import {
     Radio,
@@ -10,11 +10,11 @@ import {
     CircleDot,
     CheckCircle2,
     ArrowUpRight,
-    ArrowRight,
 } from 'lucide-react';
 
 const API_BASE = 'https://reporadar-api-6uvh.onrender.com';
 const REPO_URL = 'https://github.com/Bannawat01/RepoRadar';
+const CARD_ACCENT = '#e0a039';
 
 type FeedEvent = {
     id: string;
@@ -57,8 +57,8 @@ function visual(ev: FeedEvent): { Icon: typeof GitCommit; color: string } {
     if (ev.event === 'push') return { Icon: GitCommit, color: '#2ee6a6' };
     if (ev.event === 'pull_request')
         return ev.action === 'merged'
-            ? { Icon: GitMerge, color: '#a99eff' }
-            : { Icon: GitPullRequest, color: '#8b7fff' };
+            ? { Icon: GitMerge, color: '#f0c274' }
+            : { Icon: GitPullRequest, color: '#e0a039' };
     // issues
     return ev.action === 'closed'
         ? { Icon: CheckCircle2, color: '#2ee6a6' }
@@ -74,8 +74,6 @@ function ago(iso: string): string {
     if (h < 24) return `${h}h ago`;
     return `${Math.floor(h / 24)}d ago`;
 }
-
-const PIPELINE = ['GitHub', 'API', 'n8n', 'Discord'];
 
 export default function RepoRadarShowcase() {
     const [events, setEvents] = useState<FeedEvent[] | null>(null);
@@ -123,24 +121,25 @@ export default function RepoRadarShowcase() {
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.4 }}
             id="repo-radar"
-            className="project-card mb-3 rounded-xl p-5 ring-1 ring-[#8b7fff]/25 shadow-[0_0_0_1px_rgba(139,127,255,0.12),0_12px_40px_rgba(139,127,255,0.10)] scroll-mt-16 lg:scroll-mt-24"
+            className="showcase-card mb-3 p-5 scroll-mt-16 lg:scroll-mt-24"
+            style={{ '--card-accent': CARD_ACCENT } as CSSProperties}
         >
             {/* Header */}
-            <div className="mb-4 flex items-start justify-between gap-3">
+            <div className="mb-3 flex items-start justify-between gap-3">
                 <div className="min-w-0">
-                    <div className="flex items-center gap-2.5">
-                        <span className="text-sm font-semibold text-[#f0f0f8]">RepoRadar</span>
-                        <span className="inline-flex items-center gap-1.5 rounded-full border border-[#8b7fff]/45 bg-[#8b7fff]/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-[#a99eff] sm:text-[11px]">
-                            <span className="relative inline-flex h-2 w-2">
-                                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#8b7fff] opacity-60" />
-                                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#a99eff]" />
+                    <div className="flex items-center gap-3">
+                        <span className="font-serif text-lg text-[var(--text-primary)]">RepoRadar</span>
+                        <span className="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-[#f0c274]">
+                            <span className="relative inline-flex h-1.5 w-1.5">
+                                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#e0a039] opacity-60" />
+                                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#f0c274]" />
                             </span>
-                            Live System
+                            Live system
                         </span>
                     </div>
-                    <p className="mt-2 text-sm leading-relaxed text-[#b8b8cc]">
-                        Real-time DevOps bot — GitHub webhooks → a Fastify API (HMAC verify,
-                        idempotency) → n8n → rich Discord embeds. Fault-tolerant, at-least-once delivery.
+                    <p className="mt-1 font-mono text-[11px] text-[var(--text-muted)]">
+                        GitHub <span className="text-[var(--text-faint)]">→</span> API <span className="text-[var(--text-faint)]">→</span> n8n <span className="text-[var(--text-faint)]">→</span> Discord
+                        <span className="ml-3 text-[#7fb0ea]">TypeScript</span>
                     </p>
                 </div>
                 <a
@@ -148,51 +147,37 @@ export default function RepoRadarShowcase() {
                     target="_blank"
                     rel="noreferrer"
                     aria-label="View RepoRadar on GitHub"
-                    className="group inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#2b2b43] bg-[#161625] text-[#5d5d80] transition-all hover:border-[#3c3c5b] hover:text-[#8b7fff] sm:h-9 sm:w-9"
+                    className="group inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[var(--border-2)] bg-[var(--surface-2)] text-[var(--text-muted)] transition-all hover:border-[#e0a039]/60 hover:text-[#e0a039] sm:h-9 sm:w-9"
                 >
                     <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </a>
             </div>
 
-            {/* Pipeline */}
-            <div className="mb-4 flex flex-wrap items-center gap-1.5">
-                {PIPELINE.map((stage, i) => (
-                    <span key={stage} className="flex items-center gap-1.5">
-                        <span className="rounded-md border border-[#2a2a3f] bg-[#161622] px-2 py-1 text-[11px] font-medium text-[#9a9ac0]">
-                            {stage}
-                        </span>
-                        {i < PIPELINE.length - 1 && (
-                            <ArrowRight className="h-3 w-3 text-[#4a4a68]" />
-                        )}
-                    </span>
-                ))}
-                <span className="ml-1 inline-flex items-center gap-1 text-[11px] text-[#c084fc]">
-                    <span className="rounded-md border border-[#3178c6]/30 bg-[#3178c6]/10 px-2 py-1 font-medium text-[#7fb0ea]">
-                        TypeScript
-                    </span>
-                </span>
-            </div>
+            <p className="mb-4 text-sm leading-relaxed text-[var(--text-body)]">
+                Real-time DevOps bot — GitHub webhooks → a Fastify API (HMAC verify,
+                idempotency) → n8n → rich Discord embeds. Fault-tolerant, at-least-once delivery.
+            </p>
 
             {/* Live feed */}
-            <div className="rounded-lg border border-[#242436] bg-[#0f0f18]/60">
-                <div className="flex items-center justify-between border-b border-[#20202f] px-3.5 py-2.5">
-                    <span className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wider text-[#6e6e8a]">
-                        <Radio className="h-3.5 w-3.5 text-[#8b7fff]" />
+            <div className="rounded-lg border border-[var(--border)] bg-[var(--bg)]/60">
+                <div className="flex items-center justify-between border-b border-[var(--border)] px-3.5 py-2.5">
+                    <span className="flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+                        <Radio className="h-3.5 w-3.5 text-[#e0a039]" />
                         Live Activity Feed
                     </span>
-                    <span className="text-[10px] font-medium uppercase tracking-wider text-[#4a4a68]">
+                    <span className="font-mono text-[10px] font-medium uppercase tracking-wider text-[var(--text-faint)]">
                         {mode === 'live' && 'from /logs'}
                         {mode === 'sample' && 'preview'}
                         {mode === 'loading' && '…'}
                     </span>
                 </div>
 
-                <ul className="divide-y divide-[#1c1c2a]">
+                <ul className="divide-y divide-[var(--border)]">
                     {mode === 'loading' &&
                         [0, 1, 2].map((i) => (
                             <li key={i} className="flex items-center gap-3 px-3.5 py-3">
-                                <span className="h-7 w-7 shrink-0 animate-pulse rounded-full bg-[#1c1c2a]" />
-                                <span className="h-3 flex-1 animate-pulse rounded bg-[#1c1c2a]" />
+                                <span className="h-7 w-7 shrink-0 animate-pulse rounded-full bg-[var(--border)]" />
+                                <span className="h-3 flex-1 animate-pulse rounded bg-[var(--border)]" />
                             </li>
                         ))}
 
@@ -213,10 +198,10 @@ export default function RepoRadarShowcase() {
                                         <Icon className="h-3.5 w-3.5" />
                                     </span>
                                     <span className="min-w-0 flex-1">
-                                        <span className="block truncate text-[13px] leading-snug text-[#dcdcea]">
+                                        <span className="block truncate text-[13px] leading-snug text-[var(--text-primary)]">
                                             {ev.title}
                                         </span>
-                                        <span className="mt-0.5 block truncate text-[11px] text-[#6e6e8a]">
+                                        <span className="mt-0.5 block truncate text-[11px] text-[var(--text-muted)]">
                                             {ev.repo.name} · {ago(ev.receivedAt)}
                                         </span>
                                     </span>
@@ -234,7 +219,7 @@ export default function RepoRadarShowcase() {
                                             href={ev.url}
                                             target="_blank"
                                             rel="noreferrer"
-                                            className="flex items-center gap-3 px-3.5 py-3 transition-colors hover:bg-[#15151f]"
+                                            className="flex items-center gap-3 px-3.5 py-3 transition-colors hover:bg-[var(--surface)]"
                                         >
                                             {Row}
                                         </a>
@@ -247,7 +232,7 @@ export default function RepoRadarShowcase() {
                 </ul>
 
                 {mode === 'sample' && (
-                    <p className="border-t border-[#20202f] px-3.5 py-2 text-[10.5px] leading-relaxed text-[#5a5a78]">
+                    <p className="border-t border-[var(--border)] px-3.5 py-2 text-[10.5px] leading-relaxed text-[var(--text-faint)]">
                         Showing sample events — the live API is idle. Trigger a GitHub event and it
                         streams here in real time.
                     </p>

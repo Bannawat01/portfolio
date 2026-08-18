@@ -1,8 +1,7 @@
 'use client';
 
 import { useLanguage } from '@/context/LanguageContext';
-import { motion, useReducedMotion } from 'framer-motion';
-import { Code2, Gamepad2, Joystick, Cpu } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const SKILL_LOGOS: Record<string, { icon: string; label: string }> = {
     TypeScript: {
@@ -56,59 +55,29 @@ const SKILL_LOGOS: Record<string, { icon: string; label: string }> = {
 };
 
 const SKILL_GROUPS = [
-    {
-        titleKey: 'skills_group_core',
-        className: 'md:col-span-2 md:row-span-1',
-        accent: 'from-[#7C3AED]/30 to-[#A78BFA]/18',
-        skills: ['TypeScript', 'Golang', 'JavaScript', 'Python'],
-    },
-    {
-        titleKey: 'skills_group_frontend',
-        className: 'md:col-span-2 md:row-span-1',
-        accent: 'from-[#A78BFA]/30 to-[#1F1B3A]/30',
-        skills: ['TypeScript', 'JavaScript', 'Figma'],
-    },
-    {
-        titleKey: 'skills_group_backend',
-        className: 'md:col-span-2 md:row-span-1',
-        accent: 'from-[#4C1D95]/35 to-[#0F0F23]/18',
-        skills: ['Golang', 'Node.js', 'PostgreSQL', 'Docker'],
-    },
-    {
-        titleKey: 'skills_group_gamedev',
-        className: 'md:col-span-2 md:row-span-1',
-        accent: 'from-[#F43F5E]/25 to-[#7C3AED]/30',
-        skills: ['Unity', 'Godot', 'C#'],
-    },
-    {
-        titleKey: 'skills_group_tooling',
-        className: 'md:col-span-2 md:row-span-1',
-        accent: 'from-[#1F1B3A]/30 to-[#A78BFA]/18',
-        skills: ['Git', 'Docker', 'Figma'],
-    },
-    {
-        titleKey: 'skills_group_mindset',
-        className: 'md:col-span-2 md:row-span-1',
-        accent: 'from-[#0F0F23]/18 to-[#7C3AED]/30',
-        skills: ['Performance', 'Clean Code', 'Game Feel'],
-    },
+    { titleKey: 'skills_group_core', skills: ['TypeScript', 'Golang', 'JavaScript', 'Python'] },
+    { titleKey: 'skills_group_frontend', skills: ['TypeScript', 'JavaScript', 'Figma'] },
+    { titleKey: 'skills_group_backend', skills: ['Golang', 'Node.js', 'PostgreSQL', 'Docker'] },
+    { titleKey: 'skills_group_gamedev', skills: ['Unity', 'Godot', 'C#'] },
+    { titleKey: 'skills_group_tooling', skills: ['Git', 'Docker', 'Figma'] },
+    { titleKey: 'skills_group_mindset', skills: ['Performance', 'Clean Code', 'Game Feel'] },
 ];
 
-function SkillPill({ name }: { name: string }) {
+function SkillTag({ name }: { name: string }) {
     const skill = SKILL_LOGOS[name];
 
     if (!skill) {
         return (
-            <span className="inline-flex items-center rounded-md border border-[#3f2a8a]/50 bg-[#121228] px-3 py-1.5 text-xs font-medium text-[#d8d8eb] transition-colors duration-200 hover:border-[#a78bfa]/60">
+            <span className="inline-flex items-center rounded-md border border-[var(--border-2)] bg-[var(--surface)] px-3 py-1.5 font-mono text-[11px] font-medium text-[var(--text-body)] transition-colors duration-200 hover:border-[var(--accent)]/60">
                 {name}
             </span>
         );
     }
 
     return (
-        <span className="inline-flex items-center gap-2 rounded-md border border-[#3f2a8a]/45 bg-[#121228] px-3 py-1.5 text-xs font-medium text-[#d8d8eb] transition-all duration-200 hover:border-[#a78bfa]/70 hover:bg-[#171733]">
+        <span className="inline-flex items-center gap-2 rounded-md border border-[var(--border-2)] bg-[var(--surface)] px-3 py-1.5 font-mono text-[11px] font-medium text-[var(--text-body)] transition-all duration-200 hover:border-[var(--accent)]/60 hover:bg-[var(--surface-2)]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={skill.icon} alt={skill.label} className="h-4 w-4 object-contain" loading="lazy" />
+            <img src={skill.icon} alt={skill.label} className="h-3.5 w-3.5 object-contain" loading="lazy" />
             {skill.label}
         </span>
     );
@@ -116,7 +85,6 @@ function SkillPill({ name }: { name: string }) {
 
 export default function Skills() {
     const { t } = useLanguage();
-    const reduceMotion = useReducedMotion();
 
     return (
         <motion.section
@@ -128,66 +96,34 @@ export default function Skills() {
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.4 }}
         >
-            <div className="sticky top-0 z-20 -mx-6 mb-8 w-screen bg-[#0d0d14]/95 px-6 py-4 backdrop-blur-sm border-b border-[#242436] md:-mx-12 md:px-12 lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:border-0 lg:bg-transparent lg:backdrop-blur-none">
-                <h2 className="flex items-center gap-3 text-xs font-semibold uppercase tracking-widest text-[#6e6e8a]">
-                    <span className="text-[#8b7fff]">03.</span> {t('nav_skills')}
-                    <span className="hidden h-px flex-1 bg-[#242436] lg:block" />
+            <div className="sticky top-0 z-20 -mx-6 mb-8 w-screen bg-[var(--bg)]/95 px-6 py-4 backdrop-blur-sm border-b border-[var(--border)] md:-mx-12 md:px-12 lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:border-0 lg:bg-transparent lg:backdrop-blur-none">
+                <h2 className="flex items-baseline gap-3">
+                    <span className="section-numeral text-2xl lg:text-3xl">03</span>
+                    <span className="font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-[var(--text-muted)]">{t('nav_skills')}</span>
+                    <span className="hidden h-px flex-1 bg-[var(--border)] lg:block" />
                 </h2>
             </div>
 
-            {!reduceMotion && (
-                <div className="pointer-events-none absolute right-4 top-2 hidden h-14 w-36 overflow-hidden lg:block" aria-hidden="true">
-                    <motion.div
-                        className="absolute left-1 top-5 text-[#a78bfa]/45"
-                        animate={{ y: [0, -8, 0], rotate: [0, -6, 0] }}
-                        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                    >
-                        <Gamepad2 className="h-4 w-4" />
-                    </motion.div>
-                    <motion.div
-                        className="absolute left-14 top-1 text-[#f43f5e]/35"
-                        animate={{ y: [0, 6, 0], rotate: [0, 8, 0] }}
-                        transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut' }}
-                    >
-                        <Joystick className="h-4 w-4" />
-                    </motion.div>
-                    <motion.div
-                        className="absolute left-[6.4rem] top-6 text-[#8b7fff]/40"
-                        animate={{ y: [0, -6, 0], rotate: [0, -4, 0] }}
-                        transition={{ duration: 4.4, repeat: Infinity, ease: 'easeInOut' }}
-                    >
-                        <Code2 className="h-4 w-4" />
-                    </motion.div>
-                    <motion.div
-                        className="absolute left-[7.35rem] top-1 text-[#b9adff]/30"
-                        animate={{ y: [0, 5, 0], rotate: [0, 5, 0] }}
-                        transition={{ duration: 5.2, repeat: Infinity, ease: 'easeInOut' }}
-                    >
-                        <Cpu className="h-4 w-4" />
-                    </motion.div>
-                </div>
-            )}
-
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-6 md:auto-rows-fr">
+            {/* Spec-sheet layout — one row per group, flat tags, no rainbow bento tiles */}
+            <div>
                 {SKILL_GROUPS.map((group, index) => (
-                    <motion.article
+                    <motion.div
                         key={group.titleKey}
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.3, delay: index * 0.07 }}
-                        className={`h-full rounded-2xl border border-[#2a2150] bg-gradient-to-br ${group.accent} p-4 md:p-5 transition-all duration-200 hover:border-[#7C3AED]/65 hover:shadow-[0_0_0_1px_rgba(167,139,250,0.18)] flex flex-col ${group.className}`}
+                        transition={{ duration: 0.3, delay: index * 0.05 }}
+                        className="grid grid-cols-1 gap-3 border-b border-[var(--border)] py-5 first:pt-0 last:border-0 md:grid-cols-[160px_1fr] md:items-baseline md:gap-6"
                     >
-                        <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-[#f3f1ff]">
+                        <h3 className="font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-[var(--text-muted)]">
                             {t(group.titleKey)}
                         </h3>
-
-                        <div className="flex flex-wrap content-start gap-2.5">
+                        <div className="flex flex-wrap gap-2">
                             {group.skills.map((skill) => (
-                                <SkillPill key={skill} name={skill} />
+                                <SkillTag key={skill} name={skill} />
                             ))}
                         </div>
-                    </motion.article>
+                    </motion.div>
                 ))}
             </div>
         </motion.section>

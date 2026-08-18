@@ -1,29 +1,37 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #0d0d14;
-  --surface: #13131c;
-  --surface-2: #1a1a26;
-  --border: #242436;
-  --border-2: #2e2e45;
+  /* Warm ink palette — replaces the old blue-black + violet "AI SaaS" scheme */
+  --bg: #0c0a08;
+  --surface: #151210;
+  --surface-2: #1d1814;
+  --border: #2b2620;
+  --border-2: #3a332a;
 
-  /* Text — clear contrast hierarchy */
-  --text-primary: #f0f0f8;
+  /* Text — warm, paper-like contrast hierarchy */
+  --text-primary: #f5efe4;
   /* headings */
-  --text-body: #b8b8cc;
+  --text-body: #c7bda8;
   /* body copy */
-  --text-muted: #6e6e8a;
+  --text-muted: #8a8172;
   /* labels, meta */
-  --text-faint: #3e3e58;
+  --text-faint: #4a4438;
   /* decorative */
 
-  --accent: #8b7fff;
-  --accent-dim: rgba(139, 127, 255, 0.1);
+  /* Signature accent — warm amber/gold, not the generic indigo-violet */
+  --accent: #e0a039;
+  --accent-soft: #f0c274;
+  --accent-dim: rgba(224, 160, 57, 0.12);
+  --accent-ink: #17130c;
+  /* dark text used on solid accent fills */
 }
 
 @theme inline {
   --color-background: var(--bg);
   --color-foreground: var(--text-primary);
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-fraunces);
+  --font-mono: var(--font-jbmono);
 }
 
 * {
@@ -33,16 +41,17 @@
 body {
   background-color: var(--bg);
   color: var(--text-body);
-  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 15px;
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: radial-gradient(1200px 600px at 12% -10%, rgba(224, 160, 39, 0.05), transparent 55%);
 }
 
 ::selection {
-  background: rgba(139, 127, 255, 0.25);
-  color: #f0f0f8;
+  background: rgba(224, 160, 39, 0.22);
+  color: var(--text-primary);
 }
 
 ::-webkit-scrollbar {
@@ -54,90 +63,59 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #242436;
+  background: var(--border);
   border-radius: 3px;
 }
 
-/* ── Project Card — Glassmorphism + Gradient Border ─────────────────── */
+/* ── Project card — flat surface, hairline border, accent edge on hover ─ */
+/* Replaces the old glassmorphism gradient-border treatment: cheaper to */
+/* paint (no gradient-border compositing) and reads as considered rather */
+/* than templated. */
 .project-card {
-  background:
-    linear-gradient(rgba(19, 19, 28, 0.9), rgba(19, 19, 28, 0.9)) padding-box,
-    linear-gradient(135deg, rgba(46, 46, 69, 0.9), rgba(26, 26, 38, 0.4) 50%, rgba(46, 46, 69, 0.9)) border-box;
-  border: 1px solid transparent;
-  transition: background 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
 }
 
 .project-card:hover {
-  background:
-    linear-gradient(rgba(26, 26, 38, 0.82), rgba(26, 26, 38, 0.82)) padding-box,
-    linear-gradient(135deg, rgba(139, 127, 255, 0.55), rgba(99, 102, 241, 0.25) 50%, rgba(139, 127, 255, 0.55)) border-box;
-  box-shadow: 0 0 0 1px rgba(139, 127, 255, 0.08) inset,
-              0 8px 32px rgba(139, 127, 255, 0.08);
+  background: var(--surface-2);
+  border-color: var(--border-2);
 }
 
-/* ── Mouse spotlight — CSS custom props driven by ref + rAF, no React state ── */
-.mouse-spotlight {
-  --x: 50%;
-  --y: 50%;
-  background: radial-gradient(600px circle at var(--x) var(--y), rgba(124, 111, 255, 0.05), transparent 70%);
+/* ── Showcase card — "case file" spine instead of the old all-around ring ─ */
+/* Deliberately a different silhouette from .project-card (flat left edge, */
+/* square on that side) so the four hand-built showcases read as a distinct */
+/* class of content, not more of the same rounded-glow feature-card pattern. */
+.showcase-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--card-accent, var(--accent));
+  border-radius: 0 0.75rem 0.75rem 0;
 }
 
-/* ── Animated gradient text — slow pan, GPU-cheap ───────────────────── */
-.animate-gradient-text {
-  background-size: 220% auto;
-  animation: gradient-pan 6s ease-in-out infinite;
+/* ── Index list row — used by the Projects "index" list ─────────────── */
+.index-row {
+  border-top: 1px solid var(--border);
+  transition: background-color 0.2s ease, padding-left 0.2s ease;
 }
 
-@keyframes gradient-pan {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+.index-row:hover {
+  background-color: var(--surface);
 }
 
-/* ── Floating ambient orbs — transform-only, GPU compositing ────────── */
-.orb {
-  position: fixed;
-  border-radius: 9999px;
-  filter: blur(70px);
-  opacity: 0.5;
-  will-change: transform;
-  pointer-events: none;
-}
-
-.orb-1 {
-  top: -8%;
-  left: -6%;
-  width: 34vw;
-  height: 34vw;
-  max-width: 460px;
-  max-height: 460px;
-  background: radial-gradient(circle, rgba(139, 127, 255, 0.4), transparent 70%);
-  animation: orb-float-1 24s ease-in-out infinite;
-}
-
-.orb-2 {
-  bottom: -10%;
-  right: -8%;
-  width: 30vw;
-  height: 30vw;
-  max-width: 420px;
-  max-height: 420px;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.32), transparent 70%);
-  animation: orb-float-2 30s ease-in-out infinite;
-}
-
-@keyframes orb-float-1 {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  50% { transform: translate3d(5vw, 7vh, 0) scale(1.12); }
-}
-
-@keyframes orb-float-2 {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  50% { transform: translate3d(-6vw, -5vh, 0) scale(1.1); }
+/* ── Signature numeral — large serif figure used in section headers ─── */
+.section-numeral {
+  font-family: var(--font-fraunces);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+  opacity: 0.8;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-gradient-text,
-  .orb-1,
-  .orb-2 { animation: none; }
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
