@@ -1,18 +1,33 @@
 import type { Metadata } from 'next';
-import { Inter, Fraunces, JetBrains_Mono } from 'next/font/google';
+import { Inter, Schibsted_Grotesk, IBM_Plex_Mono, IBM_Plex_Sans_Thai } from 'next/font/google';
 import './globals.css';
 import { LanguageProvider } from '@/context/LanguageContext';
+import { ThemeProvider } from '@/context/ThemeContext';
+import { BOOT_SCRIPT } from '@/lib/boot';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
-const fraunces = Fraunces({
+// Display: tight grotesque for the name and card titles.
+const schibsted = Schibsted_Grotesk({
   subsets: ['latin'],
-  variable: '--font-fraunces',
-  style: ['normal', 'italic'],
-  weight: ['300', '400', '500', '600'],
+  variable: '--font-schibsted',
+  weight: ['400', '500', '600', '700'],
 });
-const jbMono = JetBrains_Mono({
+
+// Body: neutral workhorse. Personality lives in the display and mono faces.
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+
+// Data, labels, timestamps — Plex Mono reads as infrastructure, which is the
+// subject of most of this page.
+const plexMono = IBM_Plex_Mono({
   subsets: ['latin'],
-  variable: '--font-jbmono',
+  variable: '--font-plex-mono',
+  weight: ['400', '500', '600'],
+});
+
+// Thai body text. Inter ships no Thai glyphs, so without this the TH locale
+// falls back to whatever the OS picks and stops matching the design.
+const plexThai = IBM_Plex_Sans_Thai({
+  subsets: ['thai', 'latin'],
+  variable: '--font-plex-thai',
   weight: ['400', '500', '600'],
 });
 
@@ -61,16 +76,32 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const fontVars = `${schibsted.variable} ${inter.variable} ${plexMono.variable} ${plexThai.variable}`;
+
   return (
-    <html lang="en" className={`${inter.variable} ${fraunces.variable} ${jbMono.variable} scroll-smooth`}>
-      <body className="bg-[#0c0a08] text-[#c7bda8] antialiased">
+    <html
+      lang="en"
+      data-theme="light"
+      className={`${fontVars} scroll-smooth`}
+      suppressHydrationWarning
+    >
+      <head>
+        {/*
+          Resolves the stored theme (including 'system') and stamps data-theme
+          before first paint. Must stay inline and render-blocking here — moving
+          it into a component flashes the light palette on every dark-mode load.
+          Content is a compile-time constant; no user input reaches it.
+        */}
+        <script dangerouslySetInnerHTML={{ __html: BOOT_SCRIPT }} />
+      </head>
+      <body className="antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
-        <LanguageProvider>
-          {children}
-        </LanguageProvider>
+        <ThemeProvider>
+          <LanguageProvider>{children}</LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -53,9 +53,12 @@ export default async function Image() {
           flexDirection: 'column',
           justifyContent: 'center',
           padding: '80px',
-          backgroundColor: '#0d0d14',
+          // Satori has no CSS custom property support, so the social card is
+          // pinned to the dark palette by hand. Keep these in step with the
+          // [data-theme="dark"] block in globals.css.
+          backgroundColor: '#0b0f11',
           backgroundImage:
-            'radial-gradient(circle at 15% 15%, rgba(139,127,255,0.18), transparent 55%), radial-gradient(circle at 85% 85%, rgba(139,127,255,0.12), transparent 55%)',
+            'radial-gradient(circle at 12% 10%, rgba(69,196,208,0.14), transparent 55%)',
           fontFamily: 'Inter',
         }}
       >
@@ -69,10 +72,10 @@ export default async function Image() {
         >
           <div
             style={{
-              width: 14,
-              height: 14,
+              width: 12,
+              height: 12,
               borderRadius: '50%',
-              backgroundColor: '#2ee6a6',
+              backgroundColor: '#45c4d0',
             }}
           />
           <span
@@ -81,33 +84,64 @@ export default async function Image() {
               fontWeight: 600,
               letterSpacing: 2,
               textTransform: 'uppercase',
-              color: '#7ff0c8',
+              color: '#45c4d0',
             }}
           >
-            Open for Internship
+            Open to internships
           </span>
         </div>
+
         <div
           style={{
             display: 'flex',
             fontSize: 76,
             fontWeight: 700,
-            color: '#f0f0f8',
-            letterSpacing: -1.5,
+            color: '#f2f7f8',
+            letterSpacing: -2,
           }}
         >
           Bannawat Rattanarak
         </div>
+
         <div
           style={{
             display: 'flex',
-            marginTop: 20,
-            fontSize: 34,
+            marginTop: 18,
+            fontSize: 32,
             fontWeight: 500,
-            color: '#8b7fff',
+            color: '#a3b4ba',
           }}
         >
-          Software &amp; Game Developer
+          Backend-leaning full-stack &amp; game developer
+        </div>
+
+        {/* Carries the site's status-strip idea onto the social card. */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 28,
+            marginTop: 52,
+            paddingTop: 28,
+            borderTop: '1px solid #232f35',
+            fontSize: 22,
+            fontWeight: 500,
+            color: '#7b8d94',
+          }}
+        >
+          {['Wakeful', 'RepoRadar', 'ai-fetch-healer', 'Silent Ember'].map((name) => (
+            <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <div
+                style={{
+                  width: 8,
+                  height: 8,
+                  borderRadius: '50%',
+                  backgroundColor: '#45c4d0',
+                }}
+              />
+              {name}
+            </div>
+          ))}
         </div>
       </div>
     ),

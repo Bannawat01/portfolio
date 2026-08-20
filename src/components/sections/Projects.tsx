@@ -1,91 +1,86 @@
 'use client';
 
-import { useLanguage } from '@/context/LanguageContext';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Star, GitFork, ArrowUpRight } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import RepoRadarShowcase from '@/components/RepoRadarShowcase';
-import SilentEmberShowcase from '@/components/SilentEmberShowcase';
-import AiFetchHealerShowcase from '@/components/AiFetchHealerShowcase';
+import { useLanguage } from '@/context/LanguageContext';
+import SectionHeader from '@/components/SectionHeader';
 import WakefulShowcase from '@/components/WakefulShowcase';
+import RepoRadarShowcase from '@/components/RepoRadarShowcase';
+import AiFetchHealerShowcase from '@/components/AiFetchHealerShowcase';
+import SilentEmberShowcase from '@/components/SilentEmberShowcase';
 
-const langDot: Record<string, string> = {
+const GITHUB_OWNER = 'Bannawat01';
+
+// Language brand colours. These are identity, not palette — they stay fixed in
+// both themes. See DESIGN.md §2.
+const LANG_COLOR: Record<string, string> = {
     TypeScript: '#3178c6',
     Go: '#00add8',
     Python: '#3572a5',
     JavaScript: '#f1e05a',
 };
 
-const GITHUB_OWNER = 'Bannawat01';
-
-const projects: {
+const REPOS: {
     name: string;
     repo: string;
     url: string;
-    liveUrl?: string;
+    live?: boolean;
     description: string;
     language: string;
-    updatedAt: string;
 }[] = [
-    {
-        name: 'Albion-Market-AI',
-        repo: 'albion-api',
-        url: 'https://www.albion-market-ai.online/',
-        liveUrl: 'https://www.albion-market-ai.online/',
-        description: 'AI-powered market price analytics for Albion Online — track and predict in-game item prices.',
-        language: 'TypeScript',
-        updatedAt: 'Jul 2026',
-    },
-    {
-        name: 'CopyUI',
-        repo: 'CopyUI',
-        url: 'https://copy-ui-nine.vercel.app/',
-        liveUrl: 'https://copy-ui-nine.vercel.app/',
-        description: 'Component library playground — browse, preview, and copy ready-to-use UI snippets.',
-        language: 'TypeScript',
-        updatedAt: 'Jun 2026',
-    },
-    {
-        name: 'Trading-Vibe-v1',
-        repo: 'trading-vibe-v1',
-        url: 'https://github.com/Bannawat01/trading-vibe-v1',
-        description: 'Dashboard for monitoring automated trading bot systems and signals.',
-        language: 'JavaScript',
-        updatedAt: 'Mar 2026',
-    },
-    {
-        name: 'LaekHub-Server',
-        repo: 'LaekHub-Server',
-        url: 'https://github.com/Bannawat01/LaekHub-Server',
-        description: 'Backend server for LaekHub — a real-time hub management platform.',
-        language: 'TypeScript',
-        updatedAt: 'Feb 2026',
-    },
-    {
-        name: 'MedScan-AI',
-        repo: 'MedScan-AI',
-        url: 'https://github.com/Bannawat01/MedScan-AI',
-        description: 'AI-powered medical scan analysis tool using the Gemini API.',
-        language: 'TypeScript',
-        updatedAt: 'Feb 2026',
-    },
-    {
-        name: 'project-shop-api',
-        repo: 'project-shop-api',
-        url: 'https://github.com/Bannawat01/project-shop-api',
-        description: 'High-performance e-commerce API built with Go — products, orders, auth.',
-        language: 'Go',
-        updatedAt: 'Jan 2026',
-    },
-    {
-        name: 'TinnerApp',
-        repo: 'TinnerApp',
-        url: 'https://github.com/Bannawat01/TinnerApp',
-        description: 'A swipe-based matching app inspired by modern dating UX.',
-        language: 'TypeScript',
-        updatedAt: 'Feb 2025',
-    },
-];
+        {
+            name: 'Albion-Market-AI',
+            repo: 'albion-api',
+            url: 'https://www.albion-market-ai.online/',
+            live: true,
+            description: 'AI-powered market price analytics for Albion Online — track and predict in-game item prices.',
+            language: 'TypeScript',
+        },
+        {
+            name: 'CopyUI',
+            repo: 'CopyUI',
+            url: 'https://copy-ui-nine.vercel.app/',
+            live: true,
+            description: 'Component library playground — browse, preview, and copy ready-to-use UI snippets.',
+            language: 'TypeScript',
+        },
+        {
+            name: 'Trading-Vibe-v1',
+            repo: 'trading-vibe-v1',
+            url: 'https://github.com/Bannawat01/trading-vibe-v1',
+            description: 'Dashboard for monitoring automated trading bot systems and signals.',
+            language: 'JavaScript',
+        },
+        {
+            name: 'LaekHub-Server',
+            repo: 'LaekHub-Server',
+            url: 'https://github.com/Bannawat01/LaekHub-Server',
+            description: 'Backend server for LaekHub — a real-time hub management platform.',
+            language: 'TypeScript',
+        },
+        {
+            name: 'MedScan-AI',
+            repo: 'MedScan-AI',
+            url: 'https://github.com/Bannawat01/MedScan-AI',
+            description: 'AI-powered medical scan analysis tool using the Gemini API.',
+            language: 'TypeScript',
+        },
+        {
+            name: 'project-shop-api',
+            repo: 'project-shop-api',
+            url: 'https://github.com/Bannawat01/project-shop-api',
+            description: 'High-performance e-commerce API built with Go — products, orders, auth.',
+            language: 'Go',
+        },
+        {
+            name: 'TinnerApp',
+            repo: 'TinnerApp',
+            url: 'https://github.com/Bannawat01/TinnerApp',
+            description: 'A swipe-based matching app inspired by modern dating UX.',
+            language: 'TypeScript',
+        },
+    ];
 
 type RepoStats = { stars: number; forks: number };
 
@@ -99,11 +94,13 @@ export default function Projects() {
         const timer = setTimeout(() => ctrl.abort(), 8000);
 
         Promise.all(
-            projects.map((p) =>
+            REPOS.map((p) =>
                 fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${p.repo}`, { signal: ctrl.signal })
                     .then((r) => (r.ok ? r.json() : null))
                     .then((data: { stargazers_count?: number; forks_count?: number } | null) =>
-                        data ? [p.repo, { stars: data.stargazers_count ?? 0, forks: data.forks_count ?? 0 }] as const : null
+                        data
+                            ? ([p.repo, { stars: data.stargazers_count ?? 0, forks: data.forks_count ?? 0 }] as const)
+                            : null
                     )
                     .catch(() => null)
             )
@@ -111,9 +108,7 @@ export default function Projects() {
             .then((results) => {
                 if (!alive) return;
                 const next: Record<string, RepoStats> = {};
-                for (const r of results) {
-                    if (r) next[r[0]] = r[1];
-                }
+                for (const r of results) if (r) next[r[0]] = r[1];
                 setStats(next);
             })
             .finally(() => clearTimeout(timer));
@@ -128,110 +123,91 @@ export default function Projects() {
     return (
         <motion.section
             id="projects"
-            className="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
-            aria-label="Selected projects"
-            initial={{ opacity: 0, y: 16 }}
+            aria-label={t('nav_projects')}
+            className="scroll-mt-8"
+            initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
+            viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.4 }}
         >
-            {/* Mobile sticky header */}
-            <div className="sticky top-0 z-20 -mx-6 mb-8 w-screen bg-[var(--bg)]/95 px-6 py-4 backdrop-blur-sm border-b border-[var(--border)] md:-mx-12 md:px-12 lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:border-0 lg:bg-transparent lg:backdrop-blur-none">
-                <h2 className="flex items-baseline gap-3">
-                    <span className="section-numeral text-2xl lg:text-3xl">04</span>
-                    <span className="font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-[var(--text-muted)]">{t('nav_projects')}</span>
-                    <span className="hidden h-px flex-1 bg-[var(--border)] lg:block" />
-                </h2>
+            <SectionHeader
+                title={t('nav_projects')}
+                meta={t('meta_projects').replace('{n}', String(REPOS.length))}
+            />
+
+            <div className="space-y-3">
+                <WakefulShowcase />
+                <RepoRadarShowcase />
+                <AiFetchHealerShowcase />
+                <SilentEmberShowcase />
             </div>
 
-            <WakefulShowcase />
+            <h3 className="mt-10 mb-1 font-mono text-[10.5px] font-medium uppercase tracking-[0.16em] text-dim">
+                {t('repo_index')}
+            </h3>
 
-            <SilentEmberShowcase />
-
-            <RepoRadarShowcase />
-
-            <AiFetchHealerShowcase />
-
-            {/* Index list — replaces the uniform card grid with an editorial */}
-            {/* "table of works" read: numbered rows, accent rule on hover. */}
-            <p className="mb-1 font-mono text-[10.5px] uppercase tracking-[0.2em] text-[var(--text-faint)]">
-                Repository index
-            </p>
-            <ul>
-                {projects.map((project, index) => {
-                    const dot = langDot[project.language] ?? 'var(--text-muted)';
-                    const repoStats = stats[project.repo];
+            <ul className="border-t border-border">
+                {REPOS.map((project) => {
+                    const s = stats[project.repo];
                     return (
-                        <motion.li
-                            key={project.name}
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.3, delay: index * 0.05 }}
-                        >
+                        <li key={project.name} className="row">
                             <a
                                 href={project.url}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="index-row group flex flex-col gap-2 py-4 pl-3 pr-2 -mx-3 hover:pl-5 sm:flex-row sm:items-center sm:gap-5"
+                                className="group flex flex-col gap-1.5 px-4 py-4 sm:flex-row sm:items-center sm:gap-4"
                             >
-                                <span className="font-mono text-xs text-[var(--text-faint)] sm:w-6 sm:shrink-0">
-                                    {String(index + 1).padStart(2, '0')}
-                                </span>
-
-                                <span className="flex min-w-0 items-center gap-2 sm:w-56 sm:shrink-0">
-                                    <span className="truncate font-serif text-base text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors">
+                                <span className="flex min-w-0 items-center gap-2 sm:w-52 sm:shrink-0">
+                                    <span className="truncate font-display text-[15px] font-semibold tracking-[-0.01em] text-ink transition-colors group-hover:text-accent">
                                         {project.name}
                                     </span>
-                                    {project.liveUrl && (
-                                        <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-[#2ee6a6]/40 bg-[#2ee6a6]/10 px-2 py-0.5 text-[9.5px] font-semibold uppercase tracking-wider text-[#2ee6a6]">
-                                            <span className="relative inline-flex h-1.5 w-1.5">
-                                                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#2ee6a6] opacity-60" />
-                                                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#2ee6a6]" />
-                                            </span>
-                                            Live
-                                        </span>
+                                    {project.live && (
+                                        <span className="dot dot-live shrink-0" title={t('status_live')} />
                                     )}
                                 </span>
 
-                                <span className="min-w-0 flex-1 text-sm leading-relaxed text-[var(--text-body)]">
+                                <span className="min-w-0 flex-1 text-[13px] leading-snug text-muted">
                                     {project.description}
                                 </span>
 
-                                <span className="flex shrink-0 items-center gap-3 font-mono text-[11px] text-[var(--text-muted)] sm:w-40 sm:justify-end">
+                                <span className="flex shrink-0 items-center gap-3 font-mono text-[10.5px] text-dim tabular-nums sm:w-44 sm:justify-end">
                                     <span className="flex items-center gap-1.5">
-                                        <span className="h-2 w-2 rounded-full shrink-0" style={{ backgroundColor: dot }} />
+                                        <span
+                                            className="h-2 w-2 shrink-0 rounded-full"
+                                            style={{ backgroundColor: LANG_COLOR[project.language] ?? 'var(--dim)' }}
+                                            aria-hidden="true"
+                                        />
                                         {project.language}
                                     </span>
-                                    {repoStats && (
+                                    {s && (
                                         <span className="flex items-center gap-2">
                                             <span className="flex items-center gap-0.5">
-                                                <Star className="h-3 w-3" />{repoStats.stars}
+                                                <Star className="h-3 w-3" />
+                                                {s.stars}
                                             </span>
                                             <span className="flex items-center gap-0.5">
-                                                <GitFork className="h-3 w-3" />{repoStats.forks}
+                                                <GitFork className="h-3 w-3" />
+                                                {s.forks}
                                             </span>
                                         </span>
                                     )}
-                                    <ArrowUpRight className="h-3.5 w-3.5 shrink-0 text-[var(--text-faint)] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--accent)]" />
+                                    <ArrowUpRight className="h-3.5 w-3.5 shrink-0 text-faint transition-colors group-hover:text-accent" />
                                 </span>
                             </a>
-                        </motion.li>
+                        </li>
                     );
                 })}
             </ul>
 
-            <div className="mt-6">
-                <a
-                    href="https://github.com/Bannawat01"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="group inline-flex items-center gap-1.5 font-mono text-[13px] font-medium text-[var(--accent)] hover:text-[var(--accent-soft)] transition-colors"
-                >
-                    {t('view_github')}
-                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                </a>
-            </div>
+            <a
+                href="https://github.com/Bannawat01"
+                target="_blank"
+                rel="noreferrer"
+                className="group mt-5 inline-flex items-center gap-1.5 font-mono text-[12px] font-medium text-accent transition-colors hover:text-accent-2"
+            >
+                {t('view_github')}
+                <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </a>
         </motion.section>
     );
 }

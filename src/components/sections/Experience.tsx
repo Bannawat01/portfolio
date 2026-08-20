@@ -1,178 +1,131 @@
 'use client';
 
-import { useLanguage } from '@/context/LanguageContext';
 import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
-import { useState } from 'react';
+import { useLanguage } from '@/context/LanguageContext';
+import SectionHeader from '@/components/SectionHeader';
 
-const SKILL_ICONS: Record<string, { icon: string; label: string }> = {
-    'TypeScript': {
-        icon: '/icons/typescript-original.svg',
-        label: 'TypeScript',
-    },
-    'Golang': {
-        icon: '/icons/go-original-wordmark.svg',
-        label: 'Go',
-    },
-    'JavaScript': {
-        icon: '/icons/javascript-original.svg',
-        label: 'JavaScript',
-    },
-    'HTML & CSS': {
-        icon: '/icons/html5-original.svg',
-        label: 'HTML & CSS',
-    },
-    'Python': {
-        icon: '/icons/python-original.svg',
-        label: 'Python',
-    },
-    'Unity': {
-        icon: '/icons/unity-original.svg',
-        label: 'Unity',
-    },
-    'Godot': {
-        icon: '/icons/godot-original.svg',
-        label: 'Godot',
-    },
+const TECH_ICONS: Record<string, string> = {
+    TypeScript: '/icons/typescript-original.svg',
+    Go: '/icons/go-original-wordmark.svg',
+    JavaScript: '/icons/javascript-original.svg',
+    'HTML & CSS': '/icons/html5-original.svg',
+    Python: '/icons/python-original.svg',
+    Unity: '/icons/unity-original.svg',
+    Godot: '/icons/godot-original.svg',
 };
 
-function SkillBadge({ name, isActive }: { name: string; isActive: boolean }) {
-    const skill = SKILL_ICONS[name];
-    if (!skill) return (
-        <span className={`inline-flex items-center rounded-md border px-3 py-1.5 font-mono text-[11px] font-medium transition-all duration-200 ${isActive
-            ? 'bg-[var(--surface-2)] border-[var(--accent)]/50 text-[var(--text-primary)]'
-            : 'bg-[var(--surface)] border-[var(--border-2)] text-[var(--text-muted)]'
-            }`}>
-            {name}
-        </span>
-    );
+// Shared timeline the duration bars are measured against. Computed once at
+// module scope so the server and client render identical markup.
+const TL_START = 2022;
+const TL_END = new Date().getFullYear();
+const TL_SPAN = Math.max(1, TL_END - TL_START);
+
+const ROLES = [
+    {
+        from: 2024,
+        to: TL_END,
+        period: `2024 — ${new Date().getFullYear()}`,
+        labelKey: 'exp1_role_label',
+        titleKey: 'exp1_title',
+        descKey: 'exp1_desc',
+        tech: ['TypeScript', 'Go', 'JavaScript', 'HTML & CSS', 'Python'],
+        current: true,
+    },
+    {
+        from: 2022,
+        to: 2024,
+        period: '2022 — 2024',
+        labelKey: 'exp2_role_label',
+        titleKey: 'exp2_title',
+        descKey: 'exp2_desc',
+        tech: ['Unity', 'Godot'],
+        current: false,
+    },
+];
+
+/**
+ * The duration bar reuses the status-strip vocabulary for the one thing in this
+ * section that is genuinely quantitative: how long each role has run, measured
+ * against the same 2022–present track. It encodes real data — it is not a
+ * proficiency meter, which would be invented.
+ */
+function DurationBar({ from, to, current }: { from: number; to: number; current: boolean }) {
+    const left = ((from - TL_START) / TL_SPAN) * 100;
+    const width = Math.max(4, ((to - from) / TL_SPAN) * 100);
 
     return (
-        <span className={`inline-flex items-center gap-2 rounded-md border px-3 py-1.5 font-mono text-[11px] font-medium transition-all duration-200 ${isActive
-            ? 'bg-[var(--surface-2)] border-[var(--accent)]/50 text-[var(--text-primary)]'
-            : 'bg-[var(--surface)] border-[var(--border-2)] text-[var(--text-muted)]'
-            }`}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-                src={skill.icon}
-                alt={skill.label}
-                className={`h-3.5 w-3.5 object-contain transition-opacity duration-200 ${isActive ? 'opacity-100' : 'opacity-65'}`}
-                loading="lazy"
+        <div
+            className="relative h-1 w-full overflow-hidden rounded-full bg-surface-3"
+            aria-hidden="true"
+        >
+            <span
+                className={`absolute inset-y-0 rounded-full ${current ? 'bg-accent-vivid shadow-[0_0_10px_rgb(var(--vivid-rgb)/0.55)]' : 'bg-border-2'}`}
+                style={{ left: `${left}%`, width: `${width}%` }}
             />
-            {skill.label}
-        </span>
+        </div>
     );
 }
 
 export default function Experience() {
     const { t } = useLanguage();
-    const [activeIndex, setActiveIndex] = useState<number | null>(null);
-
-    const experiences = [
-        {
-            period: '2024 — Present',
-            roleLabel: 'exp1_role_label',
-            title: 'exp1_title',
-            desc: 'exp1_desc',
-            skills: ['TypeScript', 'Golang', 'JavaScript', 'HTML & CSS', 'Python'],
-        },
-        {
-            period: '2022 — 2024',
-            roleLabel: 'exp2_role_label',
-            title: 'exp2_title',
-            desc: 'exp2_desc',
-            skills: ['Unity', 'Godot'],
-        },
-    ];
 
     return (
         <motion.section
             id="experience"
-            className="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
-            aria-label="Work experience"
-            initial={{ opacity: 0, y: 16 }}
+            aria-label={t('nav_experience')}
+            className="scroll-mt-8"
+            initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
+            viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.4 }}
         >
-            {/* Mobile sticky header */}
-            <div className="sticky top-0 z-20 -mx-6 mb-8 w-screen bg-[var(--bg)]/95 px-6 py-4 backdrop-blur-sm border-b border-[var(--border)] md:-mx-12 md:px-12 lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:border-0 lg:bg-transparent lg:backdrop-blur-none">
-                <h2 className="flex items-baseline gap-3">
-                    <span className="section-numeral text-2xl lg:text-3xl">02</span>
-                    <span className="font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-[var(--text-muted)]">{t('nav_experience')}</span>
-                    <span className="hidden h-px flex-1 bg-[var(--border)] lg:block" />
-                </h2>
-            </div>
+            <SectionHeader title={t('nav_experience')} meta={`${TL_START}–${TL_END}`} />
 
-            <ol className="relative space-y-4 before:absolute before:bottom-0 before:left-[105px] before:top-0 before:hidden before:w-px before:bg-[var(--border)] lg:before:block">
-                {experiences.map((exp, index) => (
-                    <motion.li
-                        key={index}
-                        onMouseEnter={() => setActiveIndex(index)}
-                        onMouseLeave={() => setActiveIndex(null)}
-                        onFocusCapture={() => setActiveIndex(index)}
-                        onBlurCapture={() => setActiveIndex(null)}
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.3, delay: index * 0.1 }}
-                    >
-                        <div className="grid gap-3 lg:grid-cols-[88px_1fr] lg:gap-6">
-                            <div className="relative hidden lg:block">
-                                <p className={`pt-1 font-mono text-[11px] font-semibold uppercase tracking-widest transition-colors duration-200 ${activeIndex === index ? 'text-[var(--accent)]' : 'text-[var(--text-muted)]'}`}>
-                                    {exp.period}
-                                </p>
-                                <span className={`absolute right-[-23px] top-2 h-3 w-3 rounded-full border-2 transition-all duration-200 ${activeIndex === index ? 'border-[var(--accent)] bg-[var(--accent)]' : 'border-[var(--border-2)] bg-[var(--surface)]'}`} />
+            <ol className="space-y-3">
+                {ROLES.map((role) => (
+                    <li key={role.titleKey}>
+                        <article className="card card-hover p-6">
+                            <DurationBar from={role.from} to={role.to} current={role.current} />
+
+                            <div className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                                <span className="font-mono text-[10.5px] font-medium uppercase tracking-[0.14em] text-dim tabular-nums">
+                                    {role.period}
+                                </span>
+                                <span className="font-mono text-[10.5px] font-medium uppercase tracking-[0.14em] text-accent">
+                                    {t(role.labelKey)}
+                                </span>
                             </div>
 
-                            <div className={`rounded-xl border p-6 transition-all duration-200 ${activeIndex === null || activeIndex === index
-                                ? 'border-[var(--border-2)] bg-[var(--surface-2)]'
-                                : 'border-[var(--border)] bg-[var(--surface)] opacity-75'
-                                }`}>
+                            <h3 className="mt-2.5 font-display text-[1.2rem] font-semibold tracking-[-0.01em] text-ink">
+                                {t(role.titleKey)}
+                            </h3>
 
-                                <p className="mb-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-[var(--text-muted)] lg:hidden">
-                                    {exp.period}
-                                </p>
+                            <p className="mt-2 max-w-2xl text-[14px] leading-relaxed text-body">
+                                {t(role.descKey)}
+                            </p>
 
-                                <p className="mb-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-[var(--accent)]">
-                                    {t(exp.roleLabel)}
-                                </p>
-
-                                <h3 className="mb-3 font-serif text-lg text-[var(--text-primary)]">
-                                    {t(exp.title)}
-                                </h3>
-
-                                <p className="mb-5 text-sm leading-relaxed text-[var(--text-body)]">
-                                    {t(exp.desc)}
-                                </p>
-
-                                <ul className="flex flex-wrap gap-2" aria-label="Technologies">
-                                    {exp.skills.map((skill, i) => (
-                                        <li key={i}>
-                                            <SkillBadge
-                                                name={skill}
-                                                isActive={activeIndex === null || activeIndex === index}
-                                            />
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </div>
-                    </motion.li>
+                            <ul className="mt-4 flex flex-wrap gap-1.5" aria-label={t('tech_label')}>
+                                {role.tech.map((name) => (
+                                    <li key={name}>
+                                        <span className="chip font-mono">
+                                            {TECH_ICONS[name] && (
+                                                // eslint-disable-next-line @next/next/no-img-element
+                                                <img
+                                                    src={TECH_ICONS[name]}
+                                                    alt=""
+                                                    className="h-3.5 w-3.5 object-contain"
+                                                    loading="lazy"
+                                                />
+                                            )}
+                                            {name}
+                                        </span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </article>
+                    </li>
                 ))}
             </ol>
-
-            <div className="mt-6">
-                <a
-                    href="https://github.com/Bannawat01"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="group inline-flex items-center gap-1.5 font-mono text-[13px] font-medium text-[var(--accent)] hover:text-[var(--accent-soft)] transition-colors"
-                >
-                    {t('view_github')}
-                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                </a>
-            </div>
         </motion.section>
     );
 }

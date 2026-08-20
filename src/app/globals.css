@@ -1,61 +1,166 @@
 @import "tailwindcss";
 
-:root {
-  /* Warm ink palette — replaces the old blue-black + violet "AI SaaS" scheme */
-  --bg: #0c0a08;
-  --surface: #151210;
-  --surface-2: #1d1814;
-  --border: #2b2620;
-  --border-2: #3a332a;
+/* ═══════════════════════════════════════════════════════════════════════════
+   TOKENS
 
-  /* Text — warm, paper-like contrast hierarchy */
-  --text-primary: #f5efe4;
-  /* headings */
-  --text-body: #c7bda8;
-  /* body copy */
-  --text-muted: #8a8172;
-  /* labels, meta */
-  --text-faint: #4a4438;
-  /* decorative */
+   Two palettes, one contract. Components read semantic tokens only — never a
+   raw hex — so `data-theme` swaps the whole site with zero component changes.
 
-  /* Signature accent — warm amber/gold, not the generic indigo-violet */
-  --accent: #e0a039;
-  --accent-soft: #f0c274;
-  --accent-dim: rgba(224, 160, 57, 0.12);
-  --accent-ink: #17130c;
-  /* dark text used on solid accent fills */
+   Accent is a single signal-teal in two strengths:
+     --accent        text-safe. Passes contrast on --bg and --surface.
+     --accent-vivid  brighter. Fills, dots, glows, gradients — never text.
+
+   Status is deliberately NOT hue-coded (no green/amber/red traffic light):
+   every state uses the same accent and differs by dot treatment instead. See
+   `.dot-*` below and DESIGN.md §3 for why.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root,
+[data-theme="light"] {
+  --bg: #f4f7f8;
+  --surface: #ffffff;
+  --surface-2: #eef3f4;
+  --surface-3: #e3eaec;
+  --border: #e2e9eb;
+  --border-2: #c6d3d7;
+
+  --ink: #081315;
+  --ink-2: #1c2e33;
+  --body: #445559;
+  --muted: #67787e;
+  --dim: #8798a0;
+  --faint: #b0bfc4;
+
+  --accent: #0f6f79;
+  --accent-2: #0a545c;
+  --accent-vivid: #12a5b4;
+  --accent-tint: rgb(15 111 121 / 0.07);
+  --accent-line: rgb(15 111 121 / 0.26);
+  --accent-rgb: 15 111 121;
+  --vivid-rgb: 18 165 180;
+  --on-accent: #ffffff;
+
+  /* Cool-tinted rather than neutral grey — reads as light through glass
+     instead of a drop shadow pasted onto the page. */
+  --shadow-sm: 0 1px 2px rgb(8 40 45 / 0.05), 0 1px 3px rgb(8 40 45 / 0.05);
+  --shadow-md: 0 2px 4px rgb(8 40 45 / 0.04), 0 10px 28px rgb(8 40 45 / 0.08);
+  --shadow-lg: 0 4px 8px rgb(8 40 45 / 0.05), 0 20px 48px rgb(8 40 45 / 0.11);
+  --glow: 0 0 0 1px rgb(var(--accent-rgb) / 0.18), 0 8px 28px rgb(var(--accent-rgb) / 0.16);
+
+  /* Top edge of a raised surface, catching light. */
+  --edge: rgb(255 255 255 / 0.9);
+
+  /* Ambient field — three soft washes and a hairline grid. Static, painted
+     once; see `.ambient`. */
+  --mesh-1: rgb(18 165 180 / 0.16);
+  --mesh-2: rgb(18 165 180 / 0.1);
+  --mesh-3: rgb(120 140 190 / 0.11);
+  --grid-line: rgb(8 40 45 / 0.032);
+  --grain-opacity: 0.03;
+
+  color-scheme: light;
 }
 
+[data-theme="dark"] {
+  --bg: #080b0d;
+  --surface: #10171a;
+  --surface-2: #172025;
+  --surface-3: #1e292f;
+  --border: #202c32;
+  --border-2: #31424a;
+
+  --ink: #f3f8f9;
+  --ink-2: #d2dfe3;
+  --body: #a1b3b9;
+  --muted: #7a8c93;
+  --dim: #5c6f76;
+  --faint: #3a4a51;
+
+  --accent: #45c4d0;
+  --accent-2: #7bdce4;
+  --accent-vivid: #5fe0ec;
+  --accent-tint: rgb(69 196 208 / 0.11);
+  --accent-line: rgb(69 196 208 / 0.3);
+  --accent-rgb: 69 196 208;
+  --vivid-rgb: 95 224 236;
+  --on-accent: #04161a;
+
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.45);
+  --shadow-md: 0 2px 4px rgb(0 0 0 / 0.35), 0 12px 32px rgb(0 0 0 / 0.5);
+  --shadow-lg: 0 4px 8px rgb(0 0 0 / 0.4), 0 24px 56px rgb(0 0 0 / 0.6);
+  --glow: 0 0 0 1px rgb(var(--accent-rgb) / 0.22), 0 8px 32px rgb(var(--accent-rgb) / 0.14);
+
+  --edge: rgb(255 255 255 / 0.07);
+
+  --mesh-1: rgb(69 196 208 / 0.17);
+  --mesh-2: rgb(69 196 208 / 0.1);
+  --mesh-3: rgb(110 130 200 / 0.13);
+  --grid-line: rgb(255 255 255 / 0.022);
+  --grain-opacity: 0.055;
+
+  color-scheme: dark;
+}
+
+/* `inline` is load-bearing: it makes utilities emit `var(--token)` instead of
+   baking a hex at build time, which is the only reason a theme swap re-skins
+   the page. Do not remove it. */
 @theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-border: var(--border);
+  --color-border-2: var(--border-2);
+
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-body: var(--body);
+  --color-muted: var(--muted);
+  --color-dim: var(--dim);
+  --color-faint: var(--faint);
+
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-vivid: var(--accent-vivid);
+  --color-accent-tint: var(--accent-tint);
+  --color-on-accent: var(--on-accent);
+
   --color-background: var(--bg);
-  --color-foreground: var(--text-primary);
-  --font-sans: var(--font-inter);
-  --font-serif: var(--font-fraunces);
-  --font-mono: var(--font-jbmono);
+  --color-foreground: var(--ink);
+
+  --font-display: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), var(--font-plex-thai), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SF Mono", monospace;
 }
 
 * {
   box-sizing: border-box;
 }
 
+html {
+  background-color: var(--bg);
+}
+
 body {
   background-color: var(--bg);
-  color: var(--text-body);
-  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--body);
+  /* Inter carries no Thai glyphs; IBM Plex Sans Thai sits behind it so the TH
+     locale renders in a matched face instead of an arbitrary system fallback. */
+  font-family: var(--font-inter), var(--font-plex-thai), ui-sans-serif, system-ui, sans-serif;
   font-size: 15px;
-  line-height: 1.75;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: radial-gradient(1200px 600px at 12% -10%, rgba(224, 160, 39, 0.05), transparent 55%);
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 ::selection {
-  background: rgba(224, 160, 39, 0.22);
-  color: var(--text-primary);
+  background: rgb(var(--accent-rgb) / 0.2);
+  color: var(--ink);
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -63,59 +168,269 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 3px;
+  background: var(--border-2);
+  border: 3px solid var(--bg);
+  border-radius: 999px;
 }
 
-/* ── Project card — flat surface, hairline border, accent edge on hover ─ */
-/* Replaces the old glassmorphism gradient-border treatment: cheaper to */
-/* paint (no gradient-border compositing) and reads as considered rather */
-/* than templated. */
-.project-card {
+::-webkit-scrollbar-thumb:hover {
+  background: var(--dim);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ── Ambient field ──────────────────────────────────────────────────────────
+   One fixed, non-interactive layer holding three soft colour washes over a
+   hairline grid. Entirely static: no animation, no backdrop-filter, no blur
+   filter — the browser rasterises it once and the compositor reuses it. This
+   is the cheap way to get depth, and it is why the old animated orbs are not
+   coming back (DESIGN.md §6).
+   ─────────────────────────────────────────────────────────────────────────── */
+.ambient {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(60rem 40rem at 8% -8%, var(--mesh-1), transparent 62%),
+    radial-gradient(46rem 34rem at 104% 12%, var(--mesh-3), transparent 60%),
+    radial-gradient(52rem 40rem at 78% 108%, var(--mesh-2), transparent 62%),
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 72px 72px, 72px 72px;
+}
+
+/* Fine grain over the whole page. Flattens the banding that large soft
+   gradients produce and keeps flat surfaces from looking plastic. */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── Signature: status dots ─────────────────────────────────────────────────
+   Every project on this page genuinely has an operational state, so state is
+   shown the way a status page shows it. The four treatments read apart by
+   shape and weight rather than hue, which keeps one accent for the whole page
+   and stays legible for colour-blind readers.
+
+     .dot-live    filled + halo + pulsing ring — receiving traffic right now
+     .dot-up      filled + halo, static        — deployed and running
+     .dot-shipped hollow ring                  — released, not a running service
+     .dot-wip     dashed ring                  — being built, nothing to run
+   ─────────────────────────────────────────────────────────────────────────── */
+.dot {
+  position: relative;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.dot-live,
+.dot-up {
+  background: var(--accent-vivid);
+  box-shadow:
+    0 0 0 3px rgb(var(--vivid-rgb) / 0.14),
+    0 0 10px rgb(var(--vivid-rgb) / 0.55);
+}
+
+.dot-live::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 999px;
+  border: 1.5px solid var(--accent-vivid);
+  animation: dot-pulse 2.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.dot-shipped {
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 0 3px rgb(var(--accent-rgb) / 0.09);
+}
+
+.dot-wip {
+  width: 9px;
+  height: 9px;
+  border: 1.5px dashed var(--muted);
+}
+
+@keyframes dot-pulse {
+  0% { opacity: 0.85; transform: scale(0.8); }
+  70%, 100% { opacity: 0; transform: scale(1.9); }
+}
+
+/* ── Card — the raised surface ──────────────────────────────────────────────
+   A card is a solid fill, a hairline, a tinted shadow, and a lit top edge.
+   The `::before` hairline is what stops large radii from reading as flat
+   rectangles: it catches light along the top the way a real raised panel does.
+   ─────────────────────────────────────────────────────────────────────────── */
+.card {
+  position: relative;
   background: var(--surface);
   border: 1px solid var(--border);
-  transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
+  border-radius: 20px;
+  box-shadow: var(--shadow-sm);
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.project-card:hover {
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  border-radius: 20px 20px 0 0;
+  background: linear-gradient(90deg, transparent, var(--edge) 30%, var(--edge) 70%, transparent);
+  pointer-events: none;
+}
+
+.card-hover:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-line);
+  box-shadow: var(--shadow-lg), 0 0 0 1px rgb(var(--accent-rgb) / 0.08);
+}
+
+/* Inset panel used for live feeds and demo output inside a card. */
+.inset {
   background: var(--surface-2);
-  border-color: var(--border-2);
-}
-
-/* ── Showcase card — "case file" spine instead of the old all-around ring ─ */
-/* Deliberately a different silhouette from .project-card (flat left edge, */
-/* square on that side) so the four hand-built showcases read as a distinct */
-/* class of content, not more of the same rounded-glow feature-card pattern. */
-.showcase-card {
-  background: var(--surface);
   border: 1px solid var(--border);
-  border-left: 3px solid var(--card-accent, var(--accent));
-  border-radius: 0 0.75rem 0.75rem 0;
+  border-radius: 14px;
 }
 
-/* ── Index list row — used by the Projects "index" list ─────────────── */
-.index-row {
-  border-top: 1px solid var(--border);
-  transition: background-color 0.2s ease, padding-left 0.2s ease;
+/* ── Chip — tags, tech badges, meta pills ─────────────────────────────────── */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.32rem 0.66rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--body);
+  font-size: 11.5px;
+  line-height: 1.2;
+  white-space: nowrap;
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
-.index-row:hover {
-  background-color: var(--surface);
+.chip:hover {
+  border-color: var(--accent-line);
+  color: var(--ink);
+  transform: translateY(-1px);
 }
 
-/* ── Signature numeral — large serif figure used in section headers ─── */
-.section-numeral {
-  font-family: var(--font-fraunces);
-  font-style: italic;
-  font-weight: 400;
+.chip-accent {
+  border-color: var(--accent-line);
+  background: var(--accent-tint);
   color: var(--accent);
-  opacity: 0.8;
+}
+
+/* ── Button — the one filled control on the page ──────────────────────────── */
+.btn-accent {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent-vivid), var(--accent));
+  color: var(--on-accent);
+  box-shadow: var(--glow);
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
+}
+
+.btn-accent:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 0 1px rgb(var(--accent-rgb) / 0.28),
+    0 12px 34px rgb(var(--accent-rgb) / 0.3);
+}
+
+/* ── Row — the repository index ───────────────────────────────────────────── */
+.row {
+  position: relative;
+  border-bottom: 1px solid var(--border);
+  border-radius: 12px;
+  transition: background-color 0.2s ease;
+}
+
+.row::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 18%;
+  bottom: 18%;
+  width: 2px;
+  border-radius: 999px;
+  background: var(--accent-vivid);
+  transform: scaleY(0);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.row:hover {
+  background: var(--surface-2);
+}
+
+.row:hover::before {
+  transform: scaleY(1);
+}
+
+/* ── Rail nav link — the active marker is a growing bar, not a colour swap ── */
+.rail-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.34rem 0;
+  color: var(--muted);
+  transition: color 0.2s ease;
+}
+
+.rail-link:hover {
+  color: var(--ink-2);
+}
+
+.rail-link .bar {
+  display: block;
+  height: 1.5px;
+  width: 14px;
+  background: var(--border-2);
+  border-radius: 2px;
+  transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.25s ease;
+}
+
+.rail-link:hover .bar {
+  width: 26px;
+  background: var(--accent);
+}
+
+.rail-link[aria-current="true"] {
+  color: var(--ink);
+}
+
+.rail-link[aria-current="true"] .bar {
+  width: 34px;
+  background: var(--accent-vivid);
+  box-shadow: 0 0 8px rgb(var(--vivid-rgb) / 0.5);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }
