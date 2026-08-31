@@ -136,10 +136,10 @@ export default function Projects() {
             />
 
             <div className="space-y-3">
+                <SilentEmberShowcase />
                 <WakefulShowcase />
                 <RepoRadarShowcase />
                 <AiFetchHealerShowcase />
-                <SilentEmberShowcase />
             </div>
 
             <h3 className="mt-10 mb-1 font-mono text-[10.5px] font-medium uppercase tracking-[0.16em] text-dim">

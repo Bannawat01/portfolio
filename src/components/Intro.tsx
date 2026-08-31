@@ -22,13 +22,13 @@ export default function Intro() {
             className="max-w-2xl text-[clamp(17px,1.5vw,19px)] leading-[1.6] tracking-[-0.005em] text-body"
         >
             {t('hero_seg1')}
-            <a href="#projects" className={LINK}>{t('hero_link_api')}</a>
-            {t('hero_seg2')}
-            <a href="#repo-radar" className={LINK}>{t('hero_link_bot')}</a>
-            {t('hero_seg3')}
-            <a href="#ai-fetch-healer" className={LINK}>{t('hero_link_npm')}</a>
-            {t('hero_seg4')}
             <a href="#silent-ember" className={LINK}>{t('hero_link_ember')}</a>
+            {t('hero_seg2')}
+            <a href="#projects" className={LINK}>{t('hero_link_api')}</a>
+            {t('hero_seg3')}
+            <a href="#repo-radar" className={LINK}>{t('hero_link_bot')}</a>
+            {t('hero_seg4')}
+            <a href="#ai-fetch-healer" className={LINK}>{t('hero_link_npm')}</a>
             {t('hero_seg5')}
         </motion.p>
     );

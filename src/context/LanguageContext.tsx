@@ -16,20 +16,21 @@ import {
 
 const en = {
     name: 'Bannawat Rattanarak',
-    role_line: 'Backend-leaning full-stack & game developer',
+    role_line: 'Game developer · backend-leaning full-stack',
     rail_available: 'Open to internships',
     rail_blurb:
-        'CS student in Thailand. I build services that stay up, and games that unsettle people.',
+        'CS student in Thailand. I build games that unsettle people, and backend systems that stay up.',
 
-    hero_seg1: 'I build backend-heavy systems — ',
-    hero_link_api: 'REST APIs',
-    hero_seg2: ', ',
-    hero_link_bot: 'a real-time bot that streams GitHub webhooks to Discord',
-    hero_seg3: ', ',
-    hero_link_npm: 'an npm package that self-heals failing API calls',
-    hero_seg4: ' — and off the clock I design games, currently building ',
+    hero_seg1: 'I design and build games. Right now that means ',
     hero_link_ember: 'Silent Ember',
-    hero_seg5: ", a horror game I'm making with a friend in Unity.",
+    hero_seg2:
+        " — a two-person psychological horror game in Unity that took my region's place in the National Software Contest national final and pitched in the RMUTI CON startup track. The other half of my work is backend-heavy systems: ",
+    hero_link_api: 'REST APIs',
+    hero_seg3: ', ',
+    hero_link_bot: 'a real-time bot that streams GitHub webhooks to Discord',
+    hero_seg4: ', and ',
+    hero_link_npm: 'an npm package that self-heals failing API calls',
+    hero_seg5: '.',
 
     strip_title: 'Currently running',
     strip_note: 'Live status',
@@ -37,7 +38,7 @@ const en = {
     sys_wakeful: 'Uptime-monitoring SaaS — real users, real billing, real on-call.',
     sys_reporadar: 'GitHub webhooks to Discord, in real time.',
     sys_healer: 'npm package that heals failing API calls and retries them.',
-    sys_ember: 'Horror game in Unity, built by two people.',
+    sys_ember: 'Psychological horror in Unity — NSC national finalist, built by two.',
 
     status_live: 'Live',
     status_up: 'Production',
@@ -50,7 +51,7 @@ const en = {
     nav_skills: 'Skills',
     nav_projects: 'Projects',
 
-    meta_about: 'Bangkok · UTC+7',
+    meta_about: 'Nakhon Ratchasima · UTC+7',
     meta_skills: '{n} tools',
     meta_projects: '4 systems · {n} repos',
     repo_index: 'Repository index',
@@ -64,20 +65,20 @@ const en = {
     lang_label: 'Language',
 
     about_p1:
-        "Hey, I'm Bannawat — a 21-year-old CS student in Thailand. I'm a full-stack developer who leans hard on the backend: APIs, servers, data flow, and the automation that keeps it all running.",
+        "Hey, I'm Bannawat — a 21-year-old CS student at Rajamangala University of Technology Isan. I design and build games. With one teammate I'm making Silent Ember, a psychological horror game in Unity: the core loop, the mechanics, and the systems underneath.",
     about_p2:
-        'I like the hard parts — a Go e-commerce API, a real-time DevOps bot that streams GitHub webhooks to Discord, an npm package that auto-heals failing API calls with an LLM. I care about services that stay up under load and fail gracefully when they don\'t.',
+        "Silent Ember took our region's place in the National Software Contest (NSC) national final in the entertainment-software category and earned development funding, and we pitched it in the RMUTI CON startup track. It reads what the player chooses to look at and decides the ending from that — no meter on screen, only the lantern's flame.",
     about_p3:
-        'The other half of me makes games. I\'m co-designing and building Silent Ember, a horror game in Unity, with a friend — from the core loop and mechanics to the systems behind it. TypeScript and Golang are my go-to tools; I reach for Python, C#, Unity, or Godot when the job calls for it.',
+        'The other half of me is a backend-leaning full-stack developer: a Go e-commerce API, a real-time DevOps bot that streams GitHub webhooks to Discord, an npm package that auto-heals failing API calls with an LLM. TypeScript and Golang are my go-to tools; I reach for Python, C#, Unity, or Godot when the job calls for it.',
 
-    exp1_role_label: 'Backend & full-stack',
-    exp1_title: 'Full-Stack Developer',
-    exp1_desc:
+    exp_game_label: 'Game development',
+    exp_game_title: 'Game Developer',
+    exp_game_desc:
+        "I design and build games in Unity and Godot — core loops, mechanics, and the systems that hold them together. Silent Ember, a two-person psychological horror game in Unity, is the current focus: it took our region's place in the NSC national final (entertainment software), earned development funding, and was pitched in the RMUTI CON startup track. I own the architecture and all the C#.",
+    exp_stack_label: 'Backend & full-stack',
+    exp_stack_title: 'Full-Stack Developer',
+    exp_stack_desc:
         'I build systems back-to-front with a backend focus — REST APIs, real-time pipelines, auth, and DevOps automation. Golang when performance and reliability matter, TypeScript across the stack. My work includes a Go e-commerce API, a webhook-driven bot, and a published npm library.',
-    exp2_role_label: 'Game development',
-    exp2_title: 'Game Developer',
-    exp2_desc:
-        'I design and build games in Unity and Godot — core loops, mechanics, and the systems that hold everything together. Silent Ember, a horror game I\'m building with a friend as a two-person team, is where I mix engineering with creative design.',
 
     skills_group_core: 'Core stack',
     skills_group_frontend: 'Frontend',
@@ -91,7 +92,20 @@ const en = {
 
     silent_ember_title: 'Silent Ember',
     silent_ember_desc:
-        "A horror game I'm building with a friend — explore the house, uncover memories, and survive what lurks in the dark.",
+        "A two-person psychological horror game in Unity. Explore a burned house, uncover what happened to Jonas's family, and reach one of several endings. The game quietly measures which memories you choose to read — 15 optional pieces, none on the main path — and decides the ending from that. No meter on screen: the lantern's flame steadies as you understand more.",
+    silent_ember_meta: 'Unity 6 · C# · two-person team · 2022–present',
+    silent_ember_award1_t: 'NSC 2026',
+    silent_ember_award1_d:
+        'Regional representative (Northeast Thailand) at the National Software Contest national final, entertainment-software category. Received development funding.',
+    silent_ember_award2_t: 'RMUTI CON',
+    silent_ember_award2_d:
+        'Pitched in the startup track — market sizing, pricing, and go-to-market for a commercial Steam release.',
+    silent_ember_award3_t: 'Signature system',
+    silent_ember_award3_d:
+        'Event-driven architecture; 6 core systems with no per-frame Update(). The ending is gated on exploration — measured at 7% rushed vs 87% thorough in playtests.',
+    silent_ember_award4_t: 'My role',
+    silent_ember_award4_d:
+        'Team lead — architecture, save/load, game systems, and all C#.',
     silent_ember_status_hint: 'Playable build coming soon.',
 };
 
@@ -101,20 +115,21 @@ type Dict = Record<keyof typeof en, string>;
 
 const th: Dict = {
     name: 'บรรณวัชร รัตนรักษ์',
-    role_line: 'Full-Stack สายหลังบ้าน และ Game Developer',
+    role_line: 'Game Developer · Full-Stack สายหลังบ้าน',
     rail_available: 'เปิดรับฝึกงาน',
     rail_blurb:
-        'นักศึกษาวิทยาการคอมพิวเตอร์ในไทย สร้างระบบที่อยู่รอดได้ และเกมที่ทำให้คนขนลุก',
+        'นักศึกษาวิทยาการคอมพิวเตอร์ในไทย สร้างเกมที่ทำให้คนขนลุก และระบบหลังบ้านที่อยู่รอดได้',
 
-    hero_seg1: 'ผมสร้างระบบฝั่ง backend เป็นหลัก — ',
-    hero_link_api: 'REST API',
-    hero_seg2: ', ',
-    hero_link_bot: 'บอทเรียลไทม์ที่ส่งต่อ GitHub webhook เข้า Discord',
-    hero_seg3: ', ',
-    hero_link_npm: 'npm package ที่ซ่อมแซม API call ที่ล้มเหลวเองอัตโนมัติ',
-    hero_seg4: ' — นอกเวลาผมออกแบบเกม ตอนนี้กำลังสร้าง ',
+    hero_seg1: 'ผมออกแบบและสร้างเกม ตอนนี้คือ ',
     hero_link_ember: 'Silent Ember',
-    hero_seg5: ' เกมสยองขวัญที่กำลังทำกับเพื่อนด้วย Unity',
+    hero_seg2:
+        ' — เกมสยองขวัญเชิงจิตวิทยาบน Unity ทีม 2 คน ที่เป็นตัวแทนภาคตะวันออกเฉียงเหนือเข้ารอบชิงชนะเลิศระดับประเทศ NSC และได้พิตช์ในสาย Startup ของ RMUTI CON อีกครึ่งหนึ่งของงานผมคือระบบฝั่งหลังบ้าน: ',
+    hero_link_api: 'REST API',
+    hero_seg3: ', ',
+    hero_link_bot: 'บอทเรียลไทม์ที่ส่งต่อ GitHub webhook เข้า Discord',
+    hero_seg4: ' และ ',
+    hero_link_npm: 'npm package ที่ซ่อม API call ที่ล้มเหลวเองอัตโนมัติ',
+    hero_seg5: '',
 
     strip_title: 'ระบบที่รันอยู่ตอนนี้',
     strip_note: 'สถานะสด',
@@ -122,7 +137,7 @@ const th: Dict = {
     sys_wakeful: 'SaaS มอนิเตอร์ uptime — ผู้ใช้จริง เก็บเงินจริง ดูแลเองจริง',
     sys_reporadar: 'ส่ง GitHub webhook เข้า Discord แบบเรียลไทม์',
     sys_healer: 'npm package ที่ซ่อม API call ที่ล้มเหลวแล้วลองใหม่ให้',
-    sys_ember: 'เกมสยองขวัญบน Unity ทำกันสองคน',
+    sys_ember: 'เกมสยองขวัญเชิงจิตวิทยาบน Unity — เข้ารอบชิงชนะเลิศ NSC ทำกันสองคน',
 
     status_live: 'กำลังทำงาน',
     status_up: 'ใช้งานจริง',
@@ -135,7 +150,7 @@ const th: Dict = {
     nav_skills: 'ทักษะ',
     nav_projects: 'ผลงาน',
 
-    meta_about: 'ประเทศไทย · UTC+7',
+    meta_about: 'นครราชสีมา · UTC+7',
     meta_skills: '{n} เครื่องมือ',
     meta_projects: '4 ระบบ · {n} repo',
     repo_index: 'ดัชนี repository',
@@ -149,20 +164,20 @@ const th: Dict = {
     lang_label: 'ภาษา',
 
     about_p1:
-        'สวัสดีครับ ผมบรรณวัชร อายุ 21 ปี เรียนวิทยาการคอมพิวเตอร์ที่ราชมงคลอีสาน เป็น full-stack developer ที่เน้นหนักไปทางหลังบ้าน — API, เซิร์ฟเวอร์, การไหลของข้อมูล และ automation ที่ทำให้ทุกอย่างทำงานต่อเนื่อง',
+        'สวัสดีครับ ผมบรรณวัชร อายุ 21 ปี เรียนวิทยาการคอมพิวเตอร์ที่มหาวิทยาลัยเทคโนโลยีราชมงคลอีสาน ผมออกแบบและสร้างเกม ตอนนี้ทำ Silent Ember เกมสยองขวัญเชิงจิตวิทยาบน Unity ร่วมกับเพื่อนอีกคน ตั้งแต่ core loop, mechanics ไปจนถึงระบบเบื้องหลัง',
     about_p2:
-        'ผมชอบส่วนที่ยาก เช่น e-commerce API ด้วย Go, บอท DevOps แบบ real-time ที่ส่ง GitHub webhook เข้า Discord, และ npm package ที่ซ่อม API call ที่ล้มเหลวอัตโนมัติด้วย LLM ให้ความสำคัญกับ service ที่อยู่รอดตอนโหลดหนักและ fail อย่างนุ่มนวลเมื่อมีปัญหา',
+        'Silent Ember เป็นตัวแทนภาคตะวันออกเฉียงเหนือเข้ารอบชิงชนะเลิศระดับประเทศ NSC หมวดโปรแกรมเพื่อความบันเทิง และได้รับทุนสนับสนุนการพัฒนา และเรายังนำไปพิตช์ในสาย Startup ของงาน RMUTI CON เกมอ่านว่าผู้เล่นเลือกจะมองอะไร แล้วเอาไปกำหนดตอนจบ โดยไม่มีมาตรวัดบนจอ ใช้เพียงเปลวไฟของตะเกียงบอกแทน',
     about_p3:
-        'อีกครึ่งของผมคือทำเกม ผมออกแบบและสร้าง Silent Ember เกมสยองขวัญด้วย Unity ร่วมกับเพื่อน ตั้งแต่ core loop, mechanics ไปจนถึงระบบเบื้องหลัง ถนัด TypeScript กับ Golang เป็นหลัก และหยิบ Python, C#, Unity หรือ Godot มาใช้ตามงาน',
+        'อีกครึ่งของผมคือ full-stack สายหลังบ้าน เช่น e-commerce API ด้วย Go, บอท DevOps แบบเรียลไทม์ที่ส่ง GitHub webhook เข้า Discord, และ npm package ที่ซ่อม API call ที่ล้มเหลวอัตโนมัติด้วย LLM ถนัด TypeScript กับ Golang เป็นหลัก และหยิบ Python, C#, Unity หรือ Godot มาใช้ตามงาน',
 
-    exp1_role_label: 'Backend และ Full-Stack',
-    exp1_title: 'Full-Stack Developer',
-    exp1_desc:
-        'สร้างระบบตั้งแต่หน้าบ้านถึงหลังบ้านโดยเน้นหลังบ้าน — REST API, pipeline แบบ real-time, ระบบ auth และ DevOps automation ใช้ Golang เมื่อ performance และความเสถียรสำคัญ และ TypeScript ทั่วทั้ง stack ผลงานมีทั้ง e-commerce API ด้วย Go, บอทที่ทำงานด้วย webhook และ npm library ที่เผยแพร่แล้ว',
-    exp2_role_label: 'การพัฒนาเกม',
-    exp2_title: 'Game Developer',
-    exp2_desc:
-        'ออกแบบและสร้างเกมด้วย Unity และ Godot ตั้งแต่ core loop, mechanics ไปจนถึงระบบที่ทำให้ทุกอย่างทำงานได้ Silent Ember เกมสยองขวัญที่ผมทำกับเพื่อนเป็นทีม 2 คน คือที่ที่ผมผสมงานวิศวกรรมกับการออกแบบเชิงสร้างสรรค์',
+    exp_game_label: 'การพัฒนาเกม',
+    exp_game_title: 'Game Developer',
+    exp_game_desc:
+        'ออกแบบและสร้างเกมด้วย Unity และ Godot ตั้งแต่ core loop, mechanics ไปจนถึงระบบที่ทำให้ทุกอย่างทำงานร่วมกัน ตอนนี้โฟกัสที่ Silent Ember เกมสยองขวัญเชิงจิตวิทยาบน Unity ทีม 2 คน เป็นตัวแทนภาคตะวันออกเฉียงเหนือเข้ารอบชิงชนะเลิศ NSC หมวดโปรแกรมเพื่อความบันเทิง ได้รับทุนสนับสนุน และนำไปพิตช์ในสาย Startup ของ RMUTI CON ผมดูแลสถาปัตยกรรมระบบและโค้ด C# ทั้งหมด',
+    exp_stack_label: 'Backend และ Full-Stack',
+    exp_stack_title: 'Full-Stack Developer',
+    exp_stack_desc:
+        'สร้างระบบตั้งแต่หน้าบ้านถึงหลังบ้านโดยเน้นหลังบ้าน — REST API, pipeline แบบเรียลไทม์, ระบบ auth และ DevOps automation ใช้ Golang เมื่อ performance และความเสถียรสำคัญ และ TypeScript ทั่วทั้ง stack ผลงานมีทั้ง e-commerce API ด้วย Go, บอทที่ทำงานด้วย webhook และ npm library ที่เผยแพร่แล้ว',
 
     skills_group_core: 'ทักษะหลัก',
     skills_group_frontend: 'Frontend',
@@ -176,7 +191,20 @@ const th: Dict = {
 
     silent_ember_title: 'Silent Ember',
     silent_ember_desc:
-        'เกมสยองขวัญที่ผมกำลังสร้างร่วมกับเพื่อน สำรวจบ้าน ค้นหาความทรงจำ และเอาชีวิตรอดจากสิ่งที่ซ่อนอยู่ในความมืด',
+        'เกมสยองขวัญเชิงจิตวิทยาบน Unity ทีม 2 คน สำรวจบ้านที่เคยไฟไหม้ ค้นหาว่าเกิดอะไรขึ้นกับครอบครัวของ Jonas และไปให้ถึงหนึ่งในหลายตอนจบ เกมแอบนับว่าผู้เล่นเลือกอ่านความทรงจำชิ้นไหนบ้าง — เนื้อหาเสริม 15 ชิ้น ไม่มีชิ้นไหนอยู่บนเส้นทางหลัก — แล้วเอาไปกำหนดตอนจบ ไม่มีมาตรวัดบนจอ ใช้ความนิ่งของเปลวไฟตะเกียงบอกแทนเมื่อผู้เล่นเข้าใจเรื่องมากขึ้น',
+    silent_ember_meta: 'Unity 6 · C# · ทีม 2 คน · 2022–ปัจจุบัน',
+    silent_ember_award1_t: 'NSC 2569',
+    silent_ember_award1_d:
+        'ตัวแทนภาคตะวันออกเฉียงเหนือเข้ารอบชิงชนะเลิศระดับประเทศ หมวดโปรแกรมเพื่อความบันเทิง และได้รับทุนสนับสนุนการพัฒนา',
+    silent_ember_award2_t: 'RMUTI CON',
+    silent_ember_award2_d:
+        'นำเสนอในสาย Startup — ประเมินขนาดตลาด การตั้งราคา และแผนออกสู่ตลาดสำหรับการวางจำหน่ายบน Steam',
+    silent_ember_award3_t: 'ระบบเด่น',
+    silent_ember_award3_d:
+        'สถาปัตยกรรมขับเคลื่อนด้วยเหตุการณ์ ระบบหลัก 6 ตัวไม่มี Update() ต่อเฟรม ตอนจบผูกกับการสำรวจ วัดจริงได้ 7% (เล่นรีบ) และ 87% (เล่นละเอียด)',
+    silent_ember_award4_t: 'บทบาทของผม',
+    silent_ember_award4_d:
+        'หัวหน้าทีม — สถาปัตยกรรม ระบบเซฟ/โหลด ระบบเกม และโค้ด C# ทั้งหมด',
     silent_ember_status_hint: 'ตัวเกมให้เล่นเร็ว ๆ นี้',
 };
 

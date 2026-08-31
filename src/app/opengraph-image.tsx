@@ -112,7 +112,7 @@ export default async function Image() {
             color: '#a3b4ba',
           }}
         >
-          Backend-leaning full-stack &amp; game developer
+          Game developer &amp; backend-leaning full-stack
         </div>
 
         {/* Carries the site's status-strip idea onto the social card. */}
@@ -129,7 +129,7 @@ export default async function Image() {
             color: '#7b8d94',
           }}
         >
-          {['Wakeful', 'RepoRadar', 'ai-fetch-healer', 'Silent Ember'].map((name) => (
+          {['Silent Ember', 'Wakeful', 'RepoRadar', 'ai-fetch-healer'].map((name) => (
             <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <div
                 style={{

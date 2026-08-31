@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { Play } from 'lucide-react';
+import { Play, Trophy, Rocket, Cpu, User } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
-import ShowcaseCard from '@/components/ShowcaseCard';
+import ShowcaseCard, { Highlights } from '@/components/ShowcaseCard';
 
 const YT_ID = 'O-dbrtYsItE';
 const YT_WATCH = `https://www.youtube.com/watch?v=${YT_ID}`;
@@ -62,7 +62,7 @@ export default function SilentEmberShowcase() {
             id="silent-ember"
             name={t('silent_ember_title')}
             status="wip"
-            meta="Unity · C# · two-person team"
+            meta={t('silent_ember_meta')}
             href={YT_WATCH}
             hrefLabel="Watch Silent Ember gameplay on YouTube"
             footnote={t('silent_ember_status_hint')}
@@ -72,6 +72,17 @@ export default function SilentEmberShowcase() {
             </p>
 
             <GameplayVideo label={t('play_video')} />
+
+            <div className="mt-5">
+                <Highlights
+                    items={[
+                        { Icon: Trophy, title: t('silent_ember_award1_t'), desc: t('silent_ember_award1_d') },
+                        { Icon: Rocket, title: t('silent_ember_award2_t'), desc: t('silent_ember_award2_d') },
+                        { Icon: Cpu, title: t('silent_ember_award3_t'), desc: t('silent_ember_award3_d') },
+                        { Icon: User, title: t('silent_ember_award4_t'), desc: t('silent_ember_award4_d') },
+                    ]}
+                />
+            </div>
         </ShowcaseCard>
     );
 }

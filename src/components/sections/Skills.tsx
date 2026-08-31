@@ -21,9 +21,9 @@ const ICONS: Record<string, string> = {
 
 const GROUPS = [
     { key: 'skills_group_core', items: ['TypeScript', 'Golang', 'JavaScript', 'Python'] },
+    { key: 'skills_group_gamedev', items: ['Unity', 'Godot', 'C#'] },
     { key: 'skills_group_backend', items: ['Golang', 'Node.js', 'PostgreSQL', 'Docker'] },
     { key: 'skills_group_frontend', items: ['TypeScript', 'JavaScript', 'Figma'] },
-    { key: 'skills_group_gamedev', items: ['Unity', 'Godot', 'C#'] },
     { key: 'skills_group_tooling', items: ['Git', 'Docker', 'Figma'] },
     { key: 'skills_group_mindset', items: ['Performance', 'Clean Code', 'Game Feel'] },
 ];

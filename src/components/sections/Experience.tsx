@@ -12,6 +12,7 @@ const TECH_ICONS: Record<string, string> = {
     Python: '/icons/python-original.svg',
     Unity: '/icons/unity-original.svg',
     Godot: '/icons/godot-original.svg',
+    'C#': '/icons/csharp-original.svg',
 };
 
 // Shared timeline the duration bars are measured against. Computed once at
@@ -22,24 +23,24 @@ const TL_SPAN = Math.max(1, TL_END - TL_START);
 
 const ROLES = [
     {
-        from: 2024,
+        from: 2022,
         to: TL_END,
-        period: `2024 — ${new Date().getFullYear()}`,
-        labelKey: 'exp1_role_label',
-        titleKey: 'exp1_title',
-        descKey: 'exp1_desc',
-        tech: ['TypeScript', 'Go', 'JavaScript', 'HTML & CSS', 'Python'],
+        period: `2022 — ${new Date().getFullYear()}`,
+        labelKey: 'exp_game_label',
+        titleKey: 'exp_game_title',
+        descKey: 'exp_game_desc',
+        tech: ['Unity', 'C#', 'Godot'],
         current: true,
     },
     {
-        from: 2022,
-        to: 2024,
-        period: '2022 — 2024',
-        labelKey: 'exp2_role_label',
-        titleKey: 'exp2_title',
-        descKey: 'exp2_desc',
-        tech: ['Unity', 'Godot'],
-        current: false,
+        from: 2024,
+        to: TL_END,
+        period: `2024 — ${new Date().getFullYear()}`,
+        labelKey: 'exp_stack_label',
+        titleKey: 'exp_stack_title',
+        descKey: 'exp_stack_desc',
+        tech: ['TypeScript', 'Go', 'JavaScript', 'HTML & CSS', 'Python'],
+        current: true,
     },
 ];
 

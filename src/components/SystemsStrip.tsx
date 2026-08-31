@@ -9,10 +9,10 @@ import StatusLabel, { type Status } from '@/components/StatusDot';
 const REPORADAR_API = 'https://reporadar-api-6uvh.onrender.com';
 
 const SYSTEMS: { anchor: string; name: string; descKey: string; status: Status }[] = [
+    { anchor: 'silent-ember', name: 'Silent Ember', descKey: 'sys_ember', status: 'wip' },
     { anchor: 'wakeful', name: 'Wakeful', descKey: 'sys_wakeful', status: 'up' },
     { anchor: 'repo-radar', name: 'RepoRadar', descKey: 'sys_reporadar', status: 'live' },
     { anchor: 'ai-fetch-healer', name: 'ai-fetch-healer', descKey: 'sys_healer', status: 'shipped' },
-    { anchor: 'silent-ember', name: 'Silent Ember', descKey: 'sys_ember', status: 'wip' },
 ];
 
 function ago(iso: string): string {

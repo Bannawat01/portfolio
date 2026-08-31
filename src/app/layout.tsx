@@ -33,7 +33,8 @@ const plexThai = IBM_Plex_Sans_Thai({
 
 const SITE_URL = 'https://bannawat.site';
 const TITLE = 'Bannawat Rattanarak - Portfolio';
-const DESCRIPTION = 'Computer Science student and Software & Game Developer.';
+const DESCRIPTION =
+  'Game developer and backend-leaning full-stack developer. Building Silent Ember, an NSC national-finalist horror game in Unity.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -62,7 +63,7 @@ const personJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Bannawat Rattanarak',
-  jobTitle: 'Software & Game Developer',
+  jobTitle: 'Game Developer & Full-Stack Developer',
   url: SITE_URL,
   sameAs: [
     'https://github.com/Bannawat01',
