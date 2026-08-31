@@ -25,6 +25,7 @@ const GROUPS = [
     { key: 'skills_group_backend', items: ['Golang', 'Node.js', 'PostgreSQL', 'Docker'] },
     { key: 'skills_group_frontend', items: ['TypeScript', 'JavaScript', 'Figma'] },
     { key: 'skills_group_tooling', items: ['Git', 'Docker', 'Figma'] },
+    { key: 'skills_group_ai', items: ['Claude', 'Gemini', 'Codex', 'Hermes'] },
     { key: 'skills_group_mindset', items: ['Performance', 'Clean Code', 'Game Feel'] },
 ];
 

@@ -85,6 +85,7 @@ const en = {
     skills_group_backend: 'Backend',
     skills_group_gamedev: 'Game dev',
     skills_group_tooling: 'Tooling',
+    skills_group_ai: 'AI-assisted dev',
     skills_group_mindset: 'Mindset',
 
     view_github: 'See everything on GitHub',
@@ -184,6 +185,7 @@ const th: Dict = {
     skills_group_backend: 'Backend',
     skills_group_gamedev: 'พัฒนาเกม',
     skills_group_tooling: 'เครื่องมือ',
+    skills_group_ai: 'พัฒนาด้วย AI',
     skills_group_mindset: 'แนวคิดการทำงาน',
 
     view_github: 'ดูทั้งหมดใน GitHub',
