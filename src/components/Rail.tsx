@@ -106,7 +106,7 @@ export default function Rail() {
 
                 <motion.a
                     variants={reveal}
-                    href="/resume.pdf"
+                    href="/resume-bannawat.jpg"
                     target="_blank"
                     rel="noreferrer"
                     // `flex w-fit` overrides .btn-accent's inline-flex: as an inline
