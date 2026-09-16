@@ -17,12 +17,12 @@
 
 :root,
 [data-theme="light"] {
-  --bg: #f4f7f8;
+  --bg: #f6f5ff;
   --surface: #ffffff;
-  --surface-2: #eef3f4;
-  --surface-3: #e3eaec;
-  --border: #e2e9eb;
-  --border-2: #c6d3d7;
+  --surface-2: #f0effb;
+  --surface-3: #e6e4f4;
+  --border: #e1dff0;
+  --border-2: #c8c4e0;
 
   --ink: #081315;
   --ink-2: #1c2e33;
@@ -31,13 +31,13 @@
   --dim: #8798a0;
   --faint: #b0bfc4;
 
-  --accent: #0f6f79;
-  --accent-2: #0a545c;
-  --accent-vivid: #12a5b4;
-  --accent-tint: rgb(15 111 121 / 0.07);
-  --accent-line: rgb(15 111 121 / 0.26);
-  --accent-rgb: 15 111 121;
-  --vivid-rgb: 18 165 180;
+  --accent: #5842b5;
+  --accent-2: #44308e;
+  --accent-vivid: #087fbc;
+  --accent-tint: rgb(88 66 181 / 0.08);
+  --accent-line: rgb(88 66 181 / 0.26);
+  --accent-rgb: 88 66 181;
+  --vivid-rgb: 8 127 188;
   --on-accent: #ffffff;
 
   /* Cool-tinted rather than neutral grey — reads as light through glass
@@ -52,9 +52,9 @@
 
   /* Ambient field — three soft washes and a hairline grid. Static, painted
      once; see `.ambient`. */
-  --mesh-1: rgb(18 165 180 / 0.16);
-  --mesh-2: rgb(18 165 180 / 0.1);
-  --mesh-3: rgb(120 140 190 / 0.11);
+  --mesh-1: rgb(124 92 252 / 0.15);
+  --mesh-2: rgb(0 177 234 / 0.1);
+  --mesh-3: rgb(126 109 207 / 0.1);
   --grid-line: rgb(8 40 45 / 0.032);
   --grain-opacity: 0.03;
 
@@ -62,28 +62,28 @@
 }
 
 [data-theme="dark"] {
-  --bg: #080b0d;
-  --surface: #10171a;
-  --surface-2: #172025;
-  --surface-3: #1e292f;
-  --border: #202c32;
-  --border-2: #31424a;
+  --bg: #0b0d18;
+  --surface: #13172a;
+  --surface-2: #1a2038;
+  --surface-3: #242b48;
+  --border: #2a3150;
+  --border-2: #3d4970;
 
-  --ink: #f3f8f9;
-  --ink-2: #d2dfe3;
-  --body: #a1b3b9;
-  --muted: #7a8c93;
-  --dim: #5c6f76;
-  --faint: #3a4a51;
+  --ink: #f5f5ff;
+  --ink-2: #d9dcf3;
+  --body: #afb5d0;
+  --muted: #848cae;
+  --dim: #626b8d;
+  --faint: #414a6d;
 
-  --accent: #45c4d0;
-  --accent-2: #7bdce4;
-  --accent-vivid: #5fe0ec;
-  --accent-tint: rgb(69 196 208 / 0.11);
-  --accent-line: rgb(69 196 208 / 0.3);
-  --accent-rgb: 69 196 208;
-  --vivid-rgb: 95 224 236;
-  --on-accent: #04161a;
+  --accent: #a993ff;
+  --accent-2: #c1b4ff;
+  --accent-vivid: #78dcff;
+  --accent-tint: rgb(169 147 255 / 0.12);
+  --accent-line: rgb(169 147 255 / 0.34);
+  --accent-rgb: 169 147 255;
+  --vivid-rgb: 120 220 255;
+  --on-accent: #0c1020;
 
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.45);
   --shadow-md: 0 2px 4px rgb(0 0 0 / 0.35), 0 12px 32px rgb(0 0 0 / 0.5);
@@ -92,9 +92,9 @@
 
   --edge: rgb(255 255 255 / 0.07);
 
-  --mesh-1: rgb(69 196 208 / 0.17);
-  --mesh-2: rgb(69 196 208 / 0.1);
-  --mesh-3: rgb(110 130 200 / 0.13);
+  --mesh-1: rgb(124 92 252 / 0.22);
+  --mesh-2: rgb(0 212 255 / 0.12);
+  --mesh-3: rgb(105 91 220 / 0.16);
   --grid-line: rgb(255 255 255 / 0.022);
   --grain-opacity: 0.055;
 

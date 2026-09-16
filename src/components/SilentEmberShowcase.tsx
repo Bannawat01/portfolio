@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Play, Trophy, Rocket, Cpu, User } from 'lucide-react';
+import { Play, Trophy, Rocket, Cpu, User, FileBadge } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import ShowcaseCard, { Highlights } from '@/components/ShowcaseCard';
 
@@ -82,6 +82,27 @@ export default function SilentEmberShowcase() {
                         { Icon: User, title: t('silent_ember_award4_t'), desc: t('silent_ember_award4_d') },
                     ]}
                 />
+            </div>
+
+            <div className="mt-4 flex flex-wrap gap-2" aria-label={t('nsc_certificates_label')}>
+                <a
+                    href="/nsc-2026-finalist.pdf"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="chip chip-accent font-mono"
+                >
+                    <FileBadge className="h-3.5 w-3.5" />
+                    {t('nsc_finalist_certificate')}
+                </a>
+                <a
+                    href="/nsc-2026-development-funding.pdf"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="chip chip-accent font-mono"
+                >
+                    <FileBadge className="h-3.5 w-3.5" />
+                    {t('nsc_funding_certificate')}
+                </a>
             </div>
         </ShowcaseCard>
     );

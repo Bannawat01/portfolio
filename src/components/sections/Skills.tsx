@@ -20,13 +20,10 @@ const ICONS: Record<string, string> = {
 };
 
 const GROUPS = [
-    { key: 'skills_group_core', items: ['TypeScript', 'Golang', 'JavaScript', 'Python'] },
-    { key: 'skills_group_gamedev', items: ['Unity', 'Godot', 'C#'] },
-    { key: 'skills_group_backend', items: ['Golang', 'Node.js', 'PostgreSQL', 'Docker'] },
-    { key: 'skills_group_frontend', items: ['TypeScript', 'JavaScript', 'Figma'] },
-    { key: 'skills_group_tooling', items: ['Git', 'Docker', 'Figma'] },
-    { key: 'skills_group_ai', items: ['Claude', 'Gemini', 'Codex', 'Hermes'] },
-    { key: 'skills_group_mindset', items: ['Performance', 'Clean Code', 'Game Feel'] },
+    { key: 'skills_group_gamedev', items: ['Unity', 'Godot', 'C#', 'Game systems', 'Save / Load', 'Event-driven architecture'] },
+    { key: 'skills_group_backend', items: ['Golang', 'Node.js', 'PostgreSQL', 'REST APIs', 'Authentication', 'Real-time systems'] },
+    { key: 'skills_group_frontend', items: ['TypeScript', 'JavaScript', 'HTML & CSS', 'Responsive UI'] },
+    { key: 'skills_group_tooling', items: ['Git', 'Docker', 'Python', 'Figma', 'Debugging'] },
 ];
 
 const DISTINCT = new Set(GROUPS.flatMap((g) => g.items)).size;

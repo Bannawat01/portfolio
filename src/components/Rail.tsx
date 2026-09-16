@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Facebook, Mail, FileText } from 'lucide-react';
+import { Github, Linkedin, Facebook, Mail, FileText, CalendarDays } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import ThemeToggle from '@/components/ThemeToggle';
 import LanguageToggle from '@/components/LanguageToggle';
@@ -103,6 +103,18 @@ export default function Rail() {
                 <motion.p variants={reveal} className="mt-4 max-w-sm text-[13.5px] leading-relaxed text-muted">
                     {t('rail_blurb')}
                 </motion.p>
+
+                <motion.div variants={reveal} className="inset mt-5 max-w-sm p-3.5">
+                    <div className="flex gap-2.5">
+                        <CalendarDays className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                        <div>
+                            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.13em] text-accent">
+                                {t('coop_title')}
+                            </p>
+                            <p className="mt-1 text-[12px] leading-relaxed text-muted">{t('coop_dates')}</p>
+                        </div>
+                    </div>
+                </motion.div>
 
                 <motion.a
                     variants={reveal}

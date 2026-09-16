@@ -56,9 +56,9 @@ export default async function Image() {
           // Satori has no CSS custom property support, so the social card is
           // pinned to the dark palette by hand. Keep these in step with the
           // [data-theme="dark"] block in globals.css.
-          backgroundColor: '#0b0f11',
+          backgroundColor: '#0b0d18',
           backgroundImage:
-            'radial-gradient(circle at 12% 10%, rgba(69,196,208,0.14), transparent 55%)',
+            'radial-gradient(circle at 12% 10%, rgba(124,92,252,0.22), transparent 55%)',
           fontFamily: 'Inter',
         }}
       >
@@ -75,7 +75,7 @@ export default async function Image() {
               width: 12,
               height: 12,
               borderRadius: '50%',
-              backgroundColor: '#45c4d0',
+              backgroundColor: '#78dcff',
             }}
           />
           <span
@@ -84,7 +84,7 @@ export default async function Image() {
               fontWeight: 600,
               letterSpacing: 2,
               textTransform: 'uppercase',
-              color: '#45c4d0',
+              color: '#a993ff',
             }}
           >
             Open to internships
@@ -96,7 +96,7 @@ export default async function Image() {
             display: 'flex',
             fontSize: 76,
             fontWeight: 700,
-            color: '#f2f7f8',
+            color: '#f5f5ff',
             letterSpacing: -2,
           }}
         >
@@ -109,10 +109,10 @@ export default async function Image() {
             marginTop: 18,
             fontSize: 32,
             fontWeight: 500,
-            color: '#a3b4ba',
+            color: '#afb5d0',
           }}
         >
-          Game developer &amp; backend-leaning full-stack
+          Game developer &amp; full-stack engineer
         </div>
 
         {/* Carries the site's status-strip idea onto the social card. */}
@@ -123,10 +123,10 @@ export default async function Image() {
             gap: 28,
             marginTop: 52,
             paddingTop: 28,
-            borderTop: '1px solid #232f35',
+            borderTop: '1px solid #2a3150',
             fontSize: 22,
             fontWeight: 500,
-            color: '#7b8d94',
+            color: '#848cae',
           }}
         >
           {['Silent Ember', 'Wakeful', 'RepoRadar', 'ai-fetch-healer'].map((name) => (
@@ -136,7 +136,7 @@ export default async function Image() {
                   width: 8,
                   height: 8,
                   borderRadius: '50%',
-                  backgroundColor: '#45c4d0',
+                  backgroundColor: '#78dcff',
                 }}
               />
               {name}

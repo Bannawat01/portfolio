@@ -16,10 +16,14 @@ import {
 
 const en = {
     name: 'Bannawat Rattanarak',
-    role_line: 'Game developer · backend-leaning full-stack',
+    role_line: 'Game developer · full-stack engineer',
     rail_available: 'Open to internships',
     rail_blurb:
-        'CS student in Thailand. I build games that unsettle people, and backend systems that stay up.',
+        'CS student in Thailand. I build unsettling games, dependable backend systems, and freelance software for real people.',
+    coop_title: 'Internship / Co-op availability',
+    coop_dates: 'Available 2 Nov 2026 – 19 Feb 2027 · Thailand / remote',
+    hero_eyebrow: 'Game development × product engineering',
+    hero_title: 'Interactive worlds. Reliable systems.',
 
     hero_seg1: 'I design and build games. Right now that means ',
     hero_link_ember: 'Silent Ember',
@@ -53,10 +57,13 @@ const en = {
 
     meta_about: 'Nakhon Ratchasima · UTC+7',
     meta_skills: '{n} tools',
-    meta_projects: '4 systems · {n} repos',
+    meta_projects: 'Game + 3 systems · {n} repos',
     repo_index: 'Repository index',
     tech_label: 'Technologies',
     play_video: 'Play the Silent Ember gameplay video',
+    nsc_certificates_label: 'NSC 2026 certificates',
+    nsc_finalist_certificate: 'NSC 2026 national finalist certificate',
+    nsc_funding_certificate: 'NSC 2026 development funding certificate',
 
     theme_label: 'Colour theme',
     theme_light: 'Light',
@@ -65,11 +72,11 @@ const en = {
     lang_label: 'Language',
 
     about_p1:
-        "Hey, I'm Bannawat — a 21-year-old CS student at Rajamangala University of Technology Isan. I design and build games. With one teammate I'm making Silent Ember, a psychological horror game in Unity: the core loop, the mechanics, and the systems underneath.",
+        "Hey, I'm Bannawat — a 21-year-old CS student at Rajamangala University of Technology Isan. I work across game development and full-stack engineering. With one teammate I'm making Silent Ember, a psychological horror game in Unity: the core loop, mechanics, and systems underneath.",
     about_p2:
         "Silent Ember took our region's place in the National Software Contest (NSC) national final in the entertainment-software category and earned development funding, and we pitched it in the RMUTI CON startup track. It reads what the player chooses to look at and decides the ending from that — no meter on screen, only the lantern's flame.",
     about_p3:
-        'The other half of me is a backend-leaning full-stack developer: a Go e-commerce API, a real-time DevOps bot that streams GitHub webhooks to Discord, an npm package that auto-heals failing API calls with an LLM. TypeScript and Golang are my go-to tools; I reach for Python, C#, Unity, or Godot when the job calls for it.',
+        'I also build freelance and product systems back-to-front: a Go e-commerce API, a real-time DevOps bot that streams GitHub webhooks to Discord, and an npm package that auto-heals failing API calls with an LLM. TypeScript and Golang are my go-to tools; I reach for Python, C#, Unity, or Godot when the job calls for it.',
 
     exp_game_label: 'Game development',
     exp_game_title: 'Game Developer',
@@ -116,10 +123,14 @@ type Dict = Record<keyof typeof en, string>;
 
 const th: Dict = {
     name: 'บรรณวัชร รัตนรักษ์',
-    role_line: 'Game Developer · Full-Stack สายหลังบ้าน',
+    role_line: 'Game Developer · Full-Stack Engineer',
     rail_available: 'เปิดรับฝึกงาน',
     rail_blurb:
-        'นักศึกษาวิทยาการคอมพิวเตอร์ในไทย สร้างเกมที่ทำให้คนขนลุก และระบบหลังบ้านที่อยู่รอดได้',
+        'นักศึกษาวิทยาการคอมพิวเตอร์ในไทย สร้างเกมที่ทำให้คนขนลุก ระบบหลังบ้านที่อยู่รอดได้ และซอฟต์แวร์ freelance สำหรับผู้ใช้จริง',
+    coop_title: 'ช่วงเวลาพร้อมฝึกงาน / สหกิจ',
+    coop_dates: 'พร้อม 2 พ.ย. 2569 – 19 ก.พ. 2570 · ในไทย / ทำงานทางไกล',
+    hero_eyebrow: 'Game development × product engineering',
+    hero_title: 'โลกที่โต้ตอบได้ · ระบบที่เชื่อถือได้',
 
     hero_seg1: 'ผมออกแบบและสร้างเกม ตอนนี้คือ ',
     hero_link_ember: 'Silent Ember',
@@ -153,10 +164,13 @@ const th: Dict = {
 
     meta_about: 'นครราชสีมา · UTC+7',
     meta_skills: '{n} เครื่องมือ',
-    meta_projects: '4 ระบบ · {n} repo',
+    meta_projects: 'เกม + 3 ระบบ · {n} repo',
     repo_index: 'ดัชนี repository',
     tech_label: 'เทคโนโลยี',
     play_video: 'เล่นวิดีโอเกมเพลย์ Silent Ember',
+    nsc_certificates_label: 'ใบประกาศ NSC 2569',
+    nsc_finalist_certificate: 'ใบประกาศเข้ารอบชิงชนะเลิศ NSC 2569',
+    nsc_funding_certificate: 'ใบประกาศทุนพัฒนาผลงาน NSC 2569',
 
     theme_label: 'ธีมสี',
     theme_light: 'สว่าง',
@@ -165,11 +179,11 @@ const th: Dict = {
     lang_label: 'ภาษา',
 
     about_p1:
-        'สวัสดีครับ ผมบรรณวัชร อายุ 21 ปี เรียนวิทยาการคอมพิวเตอร์ที่มหาวิทยาลัยเทคโนโลยีราชมงคลอีสาน ผมออกแบบและสร้างเกม ตอนนี้ทำ Silent Ember เกมสยองขวัญเชิงจิตวิทยาบน Unity ร่วมกับเพื่อนอีกคน ตั้งแต่ core loop, mechanics ไปจนถึงระบบเบื้องหลัง',
+        'สวัสดีครับ ผมบรรณวัชร อายุ 21 ปี เรียนวิทยาการคอมพิวเตอร์ที่มหาวิทยาลัยเทคโนโลยีราชมงคลอีสาน ผมทำงานทั้งพัฒนาเกมและ full-stack engineering ตอนนี้ทำ Silent Ember เกมสยองขวัญเชิงจิตวิทยาบน Unity ร่วมกับเพื่อนอีกคน ตั้งแต่ core loop, mechanics ไปจนถึงระบบเบื้องหลัง',
     about_p2:
         'Silent Ember เป็นตัวแทนภาคตะวันออกเฉียงเหนือเข้ารอบชิงชนะเลิศระดับประเทศ NSC หมวดโปรแกรมเพื่อความบันเทิง และได้รับทุนสนับสนุนการพัฒนา และเรายังนำไปพิตช์ในสาย Startup ของงาน RMUTI CON เกมอ่านว่าผู้เล่นเลือกจะมองอะไร แล้วเอาไปกำหนดตอนจบ โดยไม่มีมาตรวัดบนจอ ใช้เพียงเปลวไฟของตะเกียงบอกแทน',
     about_p3:
-        'อีกครึ่งของผมคือ full-stack สายหลังบ้าน เช่น e-commerce API ด้วย Go, บอท DevOps แบบเรียลไทม์ที่ส่ง GitHub webhook เข้า Discord, และ npm package ที่ซ่อม API call ที่ล้มเหลวอัตโนมัติด้วย LLM ถนัด TypeScript กับ Golang เป็นหลัก และหยิบ Python, C#, Unity หรือ Godot มาใช้ตามงาน',
+        'ผมยังสร้างระบบ freelance และ product ตั้งแต่หน้าบ้านถึงหลังบ้าน เช่น e-commerce API ด้วย Go, บอท DevOps แบบเรียลไทม์ที่ส่ง GitHub webhook เข้า Discord, และ npm package ที่ซ่อม API call ที่ล้มเหลวอัตโนมัติด้วย LLM ถนัด TypeScript กับ Golang เป็นหลัก และหยิบ Python, C#, Unity หรือ Godot มาใช้ตามงาน',
 
     exp_game_label: 'การพัฒนาเกม',
     exp_game_title: 'Game Developer',

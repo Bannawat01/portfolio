@@ -15,21 +15,29 @@ export default function Intro() {
     const { t } = useLanguage();
 
     return (
-        <motion.p
+        <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="max-w-2xl text-[clamp(17px,1.5vw,19px)] leading-[1.6] tracking-[-0.005em] text-body"
+            className="max-w-2xl"
         >
-            {t('hero_seg1')}
-            <a href="#silent-ember" className={LINK}>{t('hero_link_ember')}</a>
-            {t('hero_seg2')}
-            <a href="#projects" className={LINK}>{t('hero_link_api')}</a>
-            {t('hero_seg3')}
-            <a href="#repo-radar" className={LINK}>{t('hero_link_bot')}</a>
-            {t('hero_seg4')}
-            <a href="#ai-fetch-healer" className={LINK}>{t('hero_link_npm')}</a>
-            {t('hero_seg5')}
-        </motion.p>
+            <p className="font-mono text-[10.5px] font-semibold uppercase tracking-[0.18em] text-accent">
+                {t('hero_eyebrow')}
+            </p>
+            <h2 className="mt-3 font-display text-[clamp(2.1rem,4.1vw,3.35rem)] font-bold leading-[1.02] tracking-[-0.04em] text-ink">
+                {t('hero_title')}
+            </h2>
+            <p className="mt-5 text-[clamp(17px,1.5vw,19px)] leading-[1.6] tracking-[-0.005em] text-body">
+                {t('hero_seg1')}
+                <a href="#silent-ember" className={LINK}>{t('hero_link_ember')}</a>
+                {t('hero_seg2')}
+                <a href="#projects" className={LINK}>{t('hero_link_api')}</a>
+                {t('hero_seg3')}
+                <a href="#repo-radar" className={LINK}>{t('hero_link_bot')}</a>
+                {t('hero_seg4')}
+                <a href="#ai-fetch-healer" className={LINK}>{t('hero_link_npm')}</a>
+                {t('hero_seg5')}
+            </p>
+        </motion.div>
     );
 }
