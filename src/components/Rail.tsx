@@ -116,18 +116,25 @@ export default function Rail() {
                     </div>
                 </motion.div>
 
-                <motion.a
-                    variants={reveal}
-                    href="/resume-bannawat.jpg"
-                    target="_blank"
-                    rel="noreferrer"
-                    // `flex w-fit` overrides .btn-accent's inline-flex: as an inline
-                    // box it picks up the paragraph's line-height as extra leading.
-                    className="btn-accent mt-6 flex w-fit font-mono text-[11px] font-semibold uppercase tracking-[0.1em]"
-                >
-                    <FileText className="h-3.5 w-3.5" />
-                    {t('view_resume')}
-                </motion.a>
+                <motion.div variants={reveal} className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2">
+                    <a
+                        href="/bannawat-rattanarak-resume.pdf"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="btn-accent flex w-fit font-mono text-[11px] font-semibold uppercase tracking-[0.1em]"
+                    >
+                        <FileText className="h-3.5 w-3.5" />
+                        {t('view_resume')}
+                    </a>
+                    <a
+                        href="/bannawat-rattanarak-cv.pdf"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-accent transition-colors hover:text-accent-2"
+                    >
+                        {t('view_cv')} →
+                    </a>
+                </motion.div>
 
                 <motion.nav
                     variants={reveal}

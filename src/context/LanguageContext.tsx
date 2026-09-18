@@ -97,6 +97,7 @@ const en = {
 
     view_github: 'See everything on GitHub',
     view_resume: 'Résumé',
+    view_cv: 'Curriculum vitae',
 
     silent_ember_title: 'Silent Ember',
     silent_ember_desc:
@@ -204,6 +205,7 @@ const th: Dict = {
 
     view_github: 'ดูทั้งหมดใน GitHub',
     view_resume: 'เรซูเม่',
+    view_cv: 'ประวัติย่อ (CV)',
 
     silent_ember_title: 'Silent Ember',
     silent_ember_desc:
