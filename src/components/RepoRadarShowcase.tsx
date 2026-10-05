@@ -9,11 +9,33 @@ import {
     GitMerge,
     CircleDot,
     CheckCircle2,
+    BellRing,
+    KeyRound,
+    Rocket,
+    ServerCog,
 } from 'lucide-react';
-import ShowcaseCard from '@/components/ShowcaseCard';
+import ShowcaseCard, { Highlights } from '@/components/ShowcaseCard';
 
 const API_BASE = 'https://reporadar-api-6uvh.onrender.com';
 const REPO_URL = 'https://github.com/Bannawat01/RepoRadar';
+
+const HIGHLIGHTS = [
+    {
+        Icon: ServerCog,
+        title: 'Self-hostable',
+        desc: 'Clone the public repo, add your environment variables, and run your own instance.',
+    },
+    {
+        Icon: KeyRound,
+        title: 'Secure by default',
+        desc: 'Verifies GitHub webhook signatures and rejects duplicate deliveries before processing.',
+    },
+    {
+        Icon: BellRing,
+        title: 'Discord-ready',
+        desc: 'Turns pushes, issues, and pull requests into readable, real-time Discord notifications.',
+    },
+];
 
 type FeedEvent = {
     id: string;
@@ -106,15 +128,36 @@ export default function RepoRadarShowcase() {
             id="repo-radar"
             name="RepoRadar"
             status="live"
-            meta="GitHub → Fastify API → n8n → Discord · TypeScript"
+            meta="Open source / Self-hostable / GitHub to Fastify to n8n to Discord"
             href={REPO_URL}
             hrefLabel="View RepoRadar on GitHub"
         >
-            <p className="mb-4 max-w-2xl text-[14px] leading-relaxed text-body">
-                Real-time DevOps bot — GitHub webhooks into a Fastify API (HMAC verify,
-                idempotency), through n8n, out as rich Discord embeds. Fault-tolerant,
-                at-least-once delivery.
+            <p className="max-w-2xl text-[14px] leading-relaxed text-body">
+                An open-source, self-hostable DevOps bot that turns GitHub activity into rich
+                Discord alerts. It verifies every webhook, prevents duplicate deliveries, and
+                routes events through an editable n8n workflow, so anyone can deploy and adapt it
+                for their own repositories.
             </p>
+
+            <a
+                href={`${REPO_URL}#readme`}
+                target="_blank"
+                rel="noreferrer"
+                className="group my-4 flex items-center gap-3 rounded-xl border border-[var(--accent-line)] bg-accent-tint px-4 py-3 transition-transform hover:-translate-y-0.5"
+            >
+                <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-surface text-accent shadow-sm">
+                    <Rocket className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </span>
+                <span className="min-w-0 flex-1">
+                    <span className="block text-[13px] font-medium text-ink">Deploy your own RepoRadar</span>
+                    <span className="block truncate font-mono text-[10.5px] text-muted">
+                        Fork / configure secrets / connect GitHub / go live
+                    </span>
+                </span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-accent">
+                    Setup guide
+                </span>
+            </a>
 
             <div className="inset overflow-hidden">
                 <div className="flex items-center justify-between gap-3 border-b border-border px-4 py-2.5">
@@ -188,6 +231,10 @@ export default function RepoRadarShowcase() {
                         here in real time.
                     </p>
                 )}
+            </div>
+
+            <div className="mt-4">
+                <Highlights items={HIGHLIGHTS} />
             </div>
         </ShowcaseCard>
     );
