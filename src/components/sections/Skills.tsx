@@ -48,6 +48,26 @@ export default function Skills() {
         >
             <SectionHeader title={t('nav_skills')} meta={t('meta_skills').replace('{n}', String(DISTINCT))} />
 
+            <div className="skill-marquee mb-4" aria-label={t('tech_label')}>
+                <div className="skill-marquee-track">
+                    {[0, 1].map((copy) => (
+                        <div
+                            key={copy}
+                            className="skill-marquee-group"
+                            aria-hidden={copy === 1 || undefined}
+                        >
+                            {Object.entries(ICONS).map(([name, src]) => (
+                                <span key={name} className="chip font-mono">
+                                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                                    <img src={src} alt="" className="h-4 w-4 object-contain" />
+                                    {name}
+                                </span>
+                            ))}
+                        </div>
+                    ))}
+                </div>
+            </div>
+
             <dl className="card divide-y divide-[var(--border)]">
                 {GROUPS.map((group) => (
                     <div

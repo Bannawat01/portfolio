@@ -124,7 +124,7 @@ export default function Projects() {
         <motion.section
             id="projects"
             aria-label={t('nav_projects')}
-            className="scroll-mt-8"
+            className="parallax-section scroll-mt-8"
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
